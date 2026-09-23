@@ -589,20 +589,20 @@ CellPointsMap spread_map(
       const auto& key = kv0.first;
       const auto& offsets = spread_info.offsets(key);
       const auto& cell_pts = kv0.second;
+      OffsetSet offsets_after_duration{};
+      offsets_after_duration.resize(offsets.size());
+      std::transform(
+        offsets.cbegin(),
+        offsets.cend(),
+        offsets_after_duration.begin(),
+        [&](const ROSOffset& r) {
+          return ROSOffset{
+            r.intensity, r.ros, r.raz, Offset{r.offset.x * duration, r.offset.y * duration}
+          };
+        }
+      );
       auto r = [&]() {
         CellPointsMap result{};
-        OffsetSet offsets_after_duration{};
-        offsets_after_duration.resize(offsets.size());
-        std::transform(
-          offsets.cbegin(),
-          offsets.cend(),
-          offsets_after_duration.begin(),
-          [&](const ROSOffset& r) {
-            return ROSOffset{
-              r.intensity, r.ros, r.raz, Offset{r.offset.x * duration, r.offset.y * duration}
-            };
-          }
-        );
         for (auto& [location, cell_pts] : cell_pts)
         {
           if (cell_pts.empty())
