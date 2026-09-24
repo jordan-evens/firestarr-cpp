@@ -5,7 +5,8 @@ on:
     paths-ignore:
       - '.github/workflows/cmake-test.yml'
       - '.github/workflows/docker-cleanup.yml'
-
+    tags-ignore:
+      - '**'
   workflow_dispatch:
 
 env:
@@ -67,8 +68,23 @@ jobs:
           package-name: ${{ env.package-name }}
           platform: ${{ matrix.platform }}
 
+      # HACK: don't build on tag push, but check if this revision is tagged
+      # NOTE: requires pushing tag first and then branch
+      - name: Check tags
+        id: check
+        run: |
+          VERSION_TAG=$(git describe --tags --abbrev=0 --match "v*")
+          VERSION_HASH=$(git log -n1 --pretty=%H ${VERSION_TAG})
+          FULL_HASH=$(git rev-parse --verify HEAD)
+          IS_TAGGED=false
+          if [[ "${VERSION_HASH}" == ${FULL_HASH} ]]; then
+            IS_TAGGED=true
+          fi
+          echo "is-tagged=${IS_TAGGED}" >> $GITHUB_OUTPUT
+
     outputs:
       package: ${{ steps.build-firestarr.outputs.package }}
+      is-tagged: ${{ steps.build-firestarr.outputs.is-tagged }}
 
   merge-firestarr:
     needs: [build-docker-image]
@@ -82,10 +98,10 @@ jobs:
         suffix=
       tags: |
         type=ref,event=pr
-        type=ref,prefix=,suffix=,event=branch,enable=${{ !startsWith(github.ref, 'refs/tags/v') }}
-        type=ref,prefix=,suffix=-latest,event=branch,enable=${{ !startsWith(github.ref, 'refs/tags/v') }}
-        type=semver,pattern={{version}},prefix=,suffix=,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
-        type=semver,pattern={{major}}.{{minor}},prefix=,suffix=,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
+        type=ref,prefix=,suffix=,event=branch
+        type=ref,prefix=,suffix=-latest,event=branch
+        type=semver,pattern={{version}},prefix=,suffix=,enable=${{ needs.build-docker-image.outputs.is-tagged }}
+        type=semver,pattern={{major}}.{{minor}},prefix=,suffix=,enable=${{ needs.build-docker-image.outputs.is-tagged }}
 
   merge-firestarr-minimal:
     needs: [build-docker-image]
@@ -99,9 +115,9 @@ jobs:
         suffix=-minimal
       tags: |
         type=ref,event=pr,prefix=,suffix=-minimal
-        type=ref,prefix=,suffix=-minimal,event=branch,enable=${{ !startsWith(github.ref, 'refs/tags/v') }}
-        type=ref,prefix=,suffix=-minimal-latest,event=branch,enable=${{ !startsWith(github.ref, 'refs/tags/v') }}
-        type=semver,pattern={{version}},prefix=,suffix=-minimal,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
-        type=semver,pattern={{major}}.{{minor}},prefix=,suffix=-minimal,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
-        type=raw,value=minimal,prefix=,suffix=,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
-        type=raw,value=minimal-latest,prefix=,suffix=,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
+        type=ref,prefix=,suffix=-minimal,event=branch
+        type=ref,prefix=,suffix=-minimal-latest,event=branch
+        type=semver,pattern={{version}},prefix=,suffix=-minimal,enable=${{ needs.build-docker-image.outputs.is-tagged }}
+        type=semver,pattern={{major}}.{{minor}},prefix=,suffix=-minimal,enable=${{ needs.build-docker-image.outputs.is-tagged }}
+        type=raw,value=minimal,prefix=,suffix=
+        type=raw,value=minimal-latest,prefix=,suffix=
