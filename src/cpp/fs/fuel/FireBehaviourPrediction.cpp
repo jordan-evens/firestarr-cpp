@@ -2,11 +2,16 @@
 #include "../stdafx.h"
 #include "FireBehaviourPrediction.h"
 #include "../FireSpread.h"
+#include "../LookupTable.h"
+#include "../Survival.h"
 #include "../wx/FireWeatherIndices.h"
 namespace fs::fuel
 {
 using settings::Settings;
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize bui
+// default grass fuel load (kg/m^2)
+static constexpr MathSize DEFAULT_GRASS_FUEL_LOAD = 0.35;
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_mixed_or_c2(
+  const MathSize bui
 ) noexcept
 {
   return 5.0 * (1.0 - exp(-0.0115 * bui));
@@ -87,8 +92,10 @@ FuelNonMixed::FuelNonMixed(
       duff
     )
 { }
-[[nodiscard]] MathSize FuelNonMixed::calculateIsf(const SpreadInfo& spread, const MathSize isi)
-  const noexcept
+[[nodiscard]] MathSize FuelNonMixed::calculateIsf(
+  const SpreadInfo& spread,
+  const MathSize isi
+) const noexcept
 {
   return this->limitIsf(1.0, calculateRos(spread.nd(), spread.weather, isi) * spread.slopeFactor());
 }
@@ -167,7 +174,8 @@ FuelConifer::FuelConifer(
  * \param bui Build-up Index
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_jackpine(const MathSize bui
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_jackpine(
+  const MathSize bui
 ) noexcept
 {
   return 5.0 * pow(1.0 - exp(-0.0164 * bui), 2.24);
@@ -176,8 +184,8 @@ FuelConifer::FuelConifer(
  * \brief Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
  */
-static LookupTable<&calculate_surface_fuel_consumption_jackpine> SURFACE_FUEL_CONSUMPTION_JACKPINE{
-};
+static LookupTable<&calculate_surface_fuel_consumption_jackpine>
+  SURFACE_FUEL_CONSUMPTION_JACKPINE{};
 FuelJackpine::FuelJackpine(
   const FuelCodeSize& code,
   const char* name,
@@ -304,8 +312,11 @@ FuelD1::FuelD1(const FuelCodeSize& code) noexcept
 {
   return SURFACE_FUEL_CONSUMPTION_D1(spread.weather.bui().value);
 }
-MathSize FuelD1::isfD1(const SpreadInfo& spread, const MathSize ros_multiplier, const MathSize isi)
-  const noexcept
+MathSize FuelD1::isfD1(
+  const SpreadInfo& spread,
+  const MathSize ros_multiplier,
+  const MathSize isi
+) const noexcept
 {
   return limitIsf(
     ros_multiplier,
@@ -353,15 +364,20 @@ FuelMixed::FuelMixed(
 {
   return ratioConifer() * StandardFuel::crownConsumption(cfb);
 }
-[[nodiscard]] MathSize FuelMixed::calculateRos(const int, const FwiWeather&, const MathSize isi)
-  const noexcept
+[[nodiscard]] MathSize FuelMixed::calculateRos(
+  const int,
+  const FwiWeather&,
+  const MathSize isi
+) const noexcept
 {
   static const FuelD1 F{14};
   return ratioConifer() * this->rosBasic(isi)
        + rosMultiplier() * ratioDeciduous() * F.rosBasic(isi);
 }
-[[nodiscard]] MathSize FuelMixed::calculateIsf(const SpreadInfo& spread, const MathSize isi)
-  const noexcept
+[[nodiscard]] MathSize FuelMixed::calculateIsf(
+  const SpreadInfo& spread,
+  const MathSize isi
+) const noexcept
 {
   return ratioConifer() * this->limitIsf(1.0, spread.slopeFactor() * this->rosBasic(isi))
        + ratioDeciduous() * isfD1(spread, isi);
@@ -396,7 +412,8 @@ FuelMixedWood::FuelMixedWood(
 )
   : FuelMixed(code, name, LOG_0_80, 110, 282, 150, 50, ros_multiplier, percent_mixed, 108, 25, 50)
 { }
-[[nodiscard]] MathSize FuelMixedWood::surfaceFuelConsumption(const SpreadInfo& spread
+[[nodiscard]] MathSize FuelMixedWood::surfaceFuelConsumption(
+  const SpreadInfo& spread
 ) const noexcept
 {
   return this->ratioConifer() * FuelMixed::surfaceFuelConsumption(spread)
@@ -474,8 +491,10 @@ FuelGrass::FuelGrass(
 {
   return BASE_MULTIPLIER_CURING(grass_curing(nd, wx));
 }
-[[nodiscard]] MathSize FuelGrass::calculateIsf(const SpreadInfo& spread, const MathSize isi)
-  const noexcept
+[[nodiscard]] MathSize FuelGrass::calculateIsf(
+  const SpreadInfo& spread,
+  const MathSize isi
+) const noexcept
 {
   const auto mu = baseMultiplier(spread.nd(), spread.weather);
   // prevent divide by 0
@@ -494,8 +513,10 @@ FuelGrass::FuelGrass(
 {
   return LENGTH_TO_BREADTH_GRASS(ws);
 }
-[[nodiscard]] MathSize FuelGrass::calculateRos(const MathSize multiplier, const MathSize isi)
-  const noexcept
+[[nodiscard]] MathSize FuelGrass::calculateRos(
+  const MathSize multiplier,
+  const MathSize isi
+) const noexcept
 {
   return multiplier * this->rosBasic(isi);
 }
@@ -587,7 +608,8 @@ FuelC7::FuelC7(const FuelCodeSize& code) noexcept
  * \param ffmc Fine Fuel Moisture Code
  * \return Forest Floor Consumption (FFC) (kg/m^2) [ST-X-3 eq 13]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_ffmc(const MathSize ffmc
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_ffmc(
+  const MathSize ffmc
 ) noexcept
 {
   return (ffmc > 70) ? 2.0 * (1.0 - exp(-0.104 * (ffmc - 70.0))) : 0.0;
@@ -764,8 +786,11 @@ FuelVariable::FuelVariable(
     return fuel.crownConsumption(cfb);
   });
 }
-[[nodiscard]] MathSize FuelVariable::calculateRos(const int, const FwiWeather&, const MathSize)
-  const
+[[nodiscard]] MathSize FuelVariable::calculateRos(
+  const int,
+  const FwiWeather&,
+  const MathSize
+) const
 {
   throw runtime_error("FuelVariable not resolved to specific type");
 }
@@ -794,8 +819,10 @@ FuelVariable::FuelVariable(
 {
   throw runtime_error("FuelVariable not resolved to specific type");
 }
-[[nodiscard]] MathSize FuelVariable::crownFractionBurned(const MathSize rss, const MathSize rso)
-  const noexcept
+[[nodiscard]] MathSize FuelVariable::crownFractionBurned(
+  const MathSize rss,
+  const MathSize rso
+) const noexcept
 {
   return spring()->crownFractionBurned(rss, rso);
 }

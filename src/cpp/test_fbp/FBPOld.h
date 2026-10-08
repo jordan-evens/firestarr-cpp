@@ -11,6 +11,8 @@
 #endif
 namespace fs::fuelold
 {
+// default grass fuel load (kg/m^2)
+static constexpr MathSize DEFAULT_GRASS_FUEL_LOAD = 0.35;
 [[nodiscard]] static MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize bui
 ) noexcept
 {
@@ -562,7 +564,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo&) const noexcept override
   {
-    return fs::fuel::DEFAULT_GRASS_FUEL_LOAD;
+    return DEFAULT_GRASS_FUEL_LOAD;
   }
   /**
    * \brief Grass curing

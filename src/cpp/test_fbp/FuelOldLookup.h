@@ -101,19 +101,13 @@ private:
  * \param cell Cell to check
  * \return Whether or not there is no fuel in the Cell
  */
-[[nodiscard]] constexpr bool is_null_fuel(const FuelType* fuel)
-{
-  return INVALID_FUEL_CODE == FuelType::safeCode(fuel);
-}
+[[nodiscard]] bool is_null_fuel(const FuelType* fuel);
 /**
  * \brief Whether or not there is no fuel in the Cell
  * \param cell Cell to check
  * \return Whether or not there is no fuel in the Cell
  */
-[[nodiscard]] constexpr bool is_null_fuel(const Cell& cell)
-{
-  return fs::fuelold::is_null_fuel(fs::fuelold::fuel_by_code(cell.fuelCode()));
-}
+[[nodiscard]] bool is_null_fuel(const Cell& cell);
 class LazyFuelOldLookup : public LazyPath
 {
 public:
