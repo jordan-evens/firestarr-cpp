@@ -2,6 +2,7 @@
 #include "../stdafx.h"
 #include "FireBehaviourPrediction.h"
 #include "../FireSpread.h"
+#include "../LookupTable.h"
 #include "../wx/FireWeatherIndices.h"
 namespace fs::fuel
 {
