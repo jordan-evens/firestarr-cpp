@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "Test.h"
 #include "fuel/FuelLookup.h"
+#include "fuel/FuelType.h"
 #include "types/Location.h"
 #include "wx/FireWeather.h"
 #include "FireSpread.h"
