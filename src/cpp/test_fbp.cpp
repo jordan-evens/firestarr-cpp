@@ -503,10 +503,12 @@ auto compare_fuel(
   check_equal(a.bulkDensity(), b.bulkDensity(), "bulkDensity");
   check_equal(a.inorganicPercent(), b.inorganicPercent(), "inorganicPercent");
   check_equal(a.duffDepth(), b.duffDepth(), "duffDepth");
-  testing::compare_duff("duffDmcType", *a.duffDmcType(), *b.duffDmcType(), logging::level::debug);
-  testing::compare_duff(
-    "duffFfmcType", *a.duffFfmcType(), *b.duffFfmcType(), logging::level::debug
-  );
+  static auto cmp_duff = [](const string name, const Duff& a, const Duff& b) {
+    logging::debug("Checking {:s}", name);
+    testing::compare_duff(a, b);
+  };
+  cmp_duff("duffDmcType", *a.duffDmcType(), *b.duffDmcType());
+  cmp_duff("duffFfmcType", *a.duffFfmcType(), *b.duffFfmcType());
   check_equal(a.ffmcRatio(), b.ffmcRatio(), "ffmcRatio");
   check_equal(a.dmcRatio(), b.dmcRatio(), "dmcRatio");
   //

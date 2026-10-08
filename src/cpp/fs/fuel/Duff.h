@@ -2,7 +2,6 @@
 #ifndef FS_DUFF_H
 #define FS_DUFF_H
 #include "../stdafx.h"
-#include "../Log.h"
 namespace fs::duff
 {
 /*! \page survival Probability of fire survival
@@ -171,35 +170,7 @@ static constexpr Duff SprucePine{30.7, 116.0, 58.6921, -0.2737, -0.5413, -0.1246
 }
 namespace fs::testing
 {
-template <class TypeA, class TypeB>
-int compare_duff(
-  const string name,
-  const TypeA& a,
-  const TypeB& b,
-  const logging::level log_level = logging::level::info
-)
-{
-  static constexpr int RESOLUTION = 10000;
-  static constexpr MathSize RANGE = 250.0;
-  // check %, so 1 decimal is fine
-  static constexpr auto EPSILON = static_cast<MathSize>(1e-1);
-  std::ignore = logging::output(log_level, "Checking {:s}", name);
-  logging::check_equal_verbose(logging::level::debug, a.ash, b.ash, "ash");
-  logging::check_equal_verbose(logging::level::debug, a.rho, b.rho, "rho");
-  logging::check_equal_verbose(logging::level::debug, a.b0, b.b0, "b0");
-  logging::check_equal_verbose(logging::level::debug, a.b1, b.b1, "b1");
-  logging::check_equal_verbose(logging::level::debug, a.b2, b.b2, "b2");
-  logging::check_equal_verbose(logging::level::debug, a.b3, b.b3, "b3");
-  for (auto i = 0; i < RESOLUTION; ++i)
-  {
-    const MathSize mc = RANGE * i / RESOLUTION;
-    const auto msg = std::format("probability of survival (mc = {})", mc);
-    logging::check_tolerance(
-      EPSILON, a.probabilityOfSurvival(mc), b.probabilityOfSurvival(mc), msg.c_str()
-    );
-  }
-  return 0;
-}
+int compare_duff(const duff::Duff& a, const duff::Duff& b);
 // FIX: this was used to compare to the old template version, but now just
 //      compares each Duff to itself
 int test_duff(const int argc, const char* const argv[]);

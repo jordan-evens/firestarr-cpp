@@ -4,6 +4,7 @@
 #include "../fs/stdafx.h"
 #include "../fs/Cell.h"
 #include "../fs/fuel/FuelType.h"
+#include "../fs/Log.h"
 #include "../fs/Util.h"
 namespace fs::fuelold
 {
