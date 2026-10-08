@@ -2,9 +2,9 @@
 #ifndef FS_GRID_H
 #define FS_GRID_H
 #include "stdafx.h"
+#include "geo/Point.h"
 #include "types/Location.h"
 #include "Log.h"
-#include "Point.h"
 #include "Settings.h"
 #include "tiff.h"
 namespace fs
