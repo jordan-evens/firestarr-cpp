@@ -4,6 +4,9 @@
 #include "fuel/FuelType.h"
 #include "FireSpread.h"
 #include "Util.h"
+#ifdef DEBUG_POINTS
+#include "Log.h"
+#endif
 namespace fs
 {
 using fs::fuel::fire_intensity;
