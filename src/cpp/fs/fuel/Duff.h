@@ -65,35 +65,19 @@ struct Duff
    * \param mc_pct Moisture content, percentage dry oven weight
    * \return Probability of survival (% / 100) [eq Ig-1]
    */
-  [[nodiscard]] ThresholdSize probabilityOfSurvival(const MathSize mc_pct) const noexcept
-  {
-    /**
-     * \brief Constant part of ignition probability equation [eq Ig-1]
-     */
-    const auto ConstantPart = b0 + b2 * ash + b3 * rho;
-    const auto d = 1 + exp(-(b1 * mc_pct + ConstantPart));
-    if (0 == d)
-    {
-      return 1.0;
-    }
-    return 1.0 / d;
-  }
+  [[nodiscard]] ThresholdSize probabilityOfSurvival(const MathSize mc_pct) const noexcept;
   /**
    * \brief Equality operator
    * \param rhs Duff to compare to
    * \return Whether or not these are identical
    */
-  [[nodiscard]] constexpr bool operator==(const Duff& rhs) const
-  {
-    // HACK: only equivalent if identical
-    return this == &rhs;
-  }
+  [[nodiscard]] bool operator==(const Duff& rhs) const;
   /**
    * \brief Inequality operator
    * \param rhs Duff to compare to
    * \return Whether or not these are not identical
    */
-  [[nodiscard]] constexpr bool operator!=(const Duff& rhs) const { return !operator==(rhs); }
+  [[nodiscard]] bool operator!=(const Duff& rhs) const;
 };
 // /**
 //  * \brief Feather moss (upper) [Frandsen table 2/3]

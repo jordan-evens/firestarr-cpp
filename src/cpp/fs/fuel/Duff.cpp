@@ -47,3 +47,23 @@ int test_duff(const int argc, const char* const argv[])
   return 0;
 }
 }
+[[nodiscard]] fs::ThresholdSize fs::duff::Duff::probabilityOfSurvival(const MathSize mc_pct
+) const noexcept
+{
+  /**
+   * \brief Constant part of ignition probability equation [eq Ig-1]
+   */
+  const auto ConstantPart = b0 + b2 * ash + b3 * rho;
+  const auto d = 1 + exp(-(b1 * mc_pct + ConstantPart));
+  if (0 == d)
+  {
+    return 1.0;
+  }
+  return 1.0 / d;
+}
+[[nodiscard]] bool fs::duff::Duff::operator==(const Duff& rhs) const
+{
+  // HACK: only equivalent if identical
+  return this == &rhs;
+}
+[[nodiscard]] bool fs::duff::Duff::operator!=(const Duff& rhs) const { return !operator==(rhs); }
