@@ -3,11 +3,15 @@
 #include "FireBehaviourPrediction.h"
 #include "../FireSpread.h"
 #include "../LookupTable.h"
+#include "../Settings.h"
 #include "../Survival.h"
 #include "../wx/FireWeatherIndices.h"
+#include "Greenup.h"
+#ifdef DEBUG_FUEL_VARIABLE
+#include "../Log.h"
+#endif
 namespace fs::fuel
 {
-using settings::Settings;
 // default grass fuel load (kg/m^2)
 static constexpr MathSize DEFAULT_GRASS_FUEL_LOAD = 0.35;
 [[nodiscard]] static MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize bui

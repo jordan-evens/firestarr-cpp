@@ -2,17 +2,10 @@
 #ifndef FS_FBP_H
 #define FS_FBP_H
 #include "../stdafx.h"
-#include "../Settings.h"
 #include "FuelType.h"
-#include "Greenup.h"
 #include "StandardFuel.h"
-#ifdef DEBUG_FUEL_VARIABLE
-#include "../Log.h"
-#endif
 namespace fs::fuel
 {
-using fs::fuel::calculate_grass_curing;
-using settings::Settings;
 /**
  * \brief A StandardFuel that is not made of multiple fuels.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
