@@ -12,7 +12,6 @@
 namespace fs::fuel
 {
 using fs::fuel::calculate_grass_curing;
-using fs::fuel::DEFAULT_GRASS_FUEL_LOAD;
 using settings::Settings;
 /**
  * \brief A StandardFuel that is not made of multiple fuels.

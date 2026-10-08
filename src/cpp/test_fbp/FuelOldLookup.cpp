@@ -632,4 +632,9 @@ const array<const FuelType*, NUMBER_OF_FUELS> FuelOldLookup::Fuels{
   &M3_M4_70,  &M3_M4_75, &M3_M4_80, &M3_M4_85,  &M3_M4_90, &M3_M4_95, &M1_00,    &M2_00,
   &M1_M2_00,  &M3_00,    &M4_00,    &M3_M4_100, &O1,
 };
+bool is_null_fuel(const FuelType* fuel) { return INVALID_FUEL_CODE == FuelType::safeCode(fuel); }
+bool is_null_fuel(const Cell& cell)
+{
+  return fs::fuelold::is_null_fuel(fs::fuelold::fuel_by_code(cell.fuelCode()));
+}
 }
