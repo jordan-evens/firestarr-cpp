@@ -4,8 +4,8 @@
 #include <geo_normalize.h>
 #include <tiffio.h>
 #include <xtiffio.h>
+#include "geo/projection.h"
 #include "Log.h"
-#include "projection.h"
 #include "tiff.h"
 #include "unstable.h"
 using fs::Idx;
