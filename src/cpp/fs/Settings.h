@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "fuel/FuelLookup.h"
 #include "wx/FwiWeather.h"
+#include "Log.h"
 namespace fs::settings
 {
 class Settings;

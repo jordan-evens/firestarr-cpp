@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "Environment.h"
 #include "fuel/FuelLookup.h"
+#include "fuel/FuelType.h"
 #include "types/Location.h"
 #include "types/Radians.h"
 #include "EnvironmentInfo.h"
@@ -167,7 +168,7 @@ CellGrid Environment::makeCells(const FuelGrid& fuel, const ElevationGrid& eleva
       if (y >= 0 && y < fuel.height() && x >= 0 && x < fuel.width())
       {
         // NOTE: this needs to translate to internal codes?
-        const auto f = FuelType::safeCode(fuel.at(loc));
+        const auto f = fuel::FuelType::safeCode(fuel.at(loc));
         auto s = static_cast<SlopeSize>(INVALID_SLOPE);
         auto a = static_cast<AspectSize>(INVALID_ASPECT);
         // HACK: don't calculate for outside box of cells

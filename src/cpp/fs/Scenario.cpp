@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "Scenario.h"
 #include "fuel/FuelLookup.h"
+#include "fuel/FuelType.h"
 #include "types/Location.h"
 #include "BurnedData.h"
 #include "Cell.h"
