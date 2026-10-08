@@ -2,7 +2,7 @@
 #ifndef FS_START_POINT_H
 #define FS_START_POINT_H
 #include "stdafx.h"
-#include "Point.h"
+#include "geo/Point.h"
 #include "Settings.h"
 namespace fs
 {

@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "EnvironmentInfo.h"
+#include "geo/Point.h"
 #include "Environment.h"
 #include "Grid.h"
 #include "Log.h"
-#include "Point.h"
 #include "Settings.h"
 namespace fs
 {

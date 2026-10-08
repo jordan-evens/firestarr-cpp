@@ -1,7 +1,9 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_POINT_H
 #define FS_POINT_H
-#include "stdafx.h"
+#include <format>
+#include <string_view>
+#include "../unstable.h"
 namespace fs
 {
 /**
