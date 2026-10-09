@@ -8,7 +8,7 @@
 #include "Greenup.h"
 #include "Survival.h"
 #ifdef DEBUG_FUEL_VARIABLE
-#include "../Log.h"
+#include "../log/Log.h"
 #endif
 namespace fs::fuel
 {
