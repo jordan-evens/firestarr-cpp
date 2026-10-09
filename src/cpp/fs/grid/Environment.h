@@ -2,8 +2,8 @@
 #ifndef FS_ENVIRONMENT_H
 #define FS_ENVIRONMENT_H
 #include "../stdafx.h"
-#include "../Event.h"
 #include "../geo/Point.h"
+#include "../sim/Event.h"
 #include "BurnedData.h"
 #include "Cell.h"
 #include "ConstantGrid.h"

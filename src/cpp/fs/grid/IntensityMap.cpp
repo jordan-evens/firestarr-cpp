@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "IntensityMap.h"
-#include "../Model.h"
 #include "../Perimeter.h"
+#include "../sim/Model.h"
 #include "../types/Location.h"
 #include "../unstable.h"
 #include "../Util.h"

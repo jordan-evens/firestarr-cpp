@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "SpreadCache.h"
+#include "sim/Scenario.h"
 #include "FireSpread.h"
 #include "Log.h"
-#include "Scenario.h"
 namespace fs
 {
 static MathSize find_min_ros(const Scenario& scenario, const DurationSize time)

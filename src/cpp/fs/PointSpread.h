@@ -2,8 +2,8 @@
 #ifndef FS_POINT_SPREAD_H
 #define FS_POINT_SPREAD_H
 #include "stdafx.h"
+#include "sim/Scenario.h"
 #include "CellPoints.h"
-#include "Scenario.h"
 #include "SpreadCache.h"
 namespace fs
 {

@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "Settings.h"
-#include "fuel/FuelLookup.h"
-#include "Log.h"
-#include "Trim.h"
-#include "Util.h"
+#include "../fuel/FuelLookup.h"
+#include "../Log.h"
+#include "../Trim.h"
+#include "../Util.h"
 namespace fs::settings
 {
 static mutex MUTEX{};

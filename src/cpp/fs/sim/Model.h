@@ -1,13 +1,13 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_MODEL_H
 #define FS_MODEL_H
-#include "stdafx.h"
-#include "grid/Environment.h"
-#include "wx/FireWeather.h"
+#include "../stdafx.h"
+#include "../grid/Environment.h"
+#include "../Perimeter.h"
+#include "../unstable.h"
+#include "../wx/FireWeather.h"
 #include "Iteration.h"
-#include "Perimeter.h"
 #include "Settings.h"
-#include "unstable.h"
 namespace fs
 {
 using settings::Settings;

@@ -3,7 +3,7 @@
 #define FS_PROBABILITY_MAP_H
 #include "../stdafx.h"
 #include "../Perimeter.h"
-#include "../Settings.h"
+#include "../sim/Settings.h"
 #include "../Statistics.h"
 #include "../Util.h"
 #include "GridMap.h"

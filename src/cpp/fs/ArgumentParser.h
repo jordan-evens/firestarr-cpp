@@ -2,7 +2,7 @@
 #ifndef FS_ARGUMENT_PARSER_H
 #define FS_ARGUMENT_PARSER_H
 #include "stdafx.h"
-#include "Settings.h"
+#include "sim/Settings.h"
 namespace fs::settings
 {
 struct Usage

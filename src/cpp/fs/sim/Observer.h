@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_OBSERVER_H
 #define FS_OBSERVER_H
-#include "stdafx.h"
-#include "grid/GridMap.h"
+#include "../stdafx.h"
+#include "../grid/GridMap.h"
 #include "Event.h"
 #include "Scenario.h"
 namespace fs

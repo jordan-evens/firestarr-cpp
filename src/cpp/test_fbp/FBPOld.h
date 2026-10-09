@@ -4,7 +4,7 @@
 #include "../fs/stdafx.h"
 #include "../fs/fuel/Duff.h"
 #include "../fs/fuel/Greenup.h"
-#include "../fs/Settings.h"
+#include "../fs/sim/Settings.h"
 #include "StandardFuelOld.h"
 #ifdef DEBUG_FUEL_VARIABLE
 #include "../fs/Log.h"
