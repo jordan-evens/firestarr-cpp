@@ -1,12 +1,12 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_ENVIRONMENT_H
 #define FS_ENVIRONMENT_H
-#include "stdafx.h"
-#include "geo/Point.h"
+#include "../stdafx.h"
+#include "../Event.h"
+#include "../geo/Point.h"
 #include "BurnedData.h"
 #include "Cell.h"
 #include "ConstantGrid.h"
-#include "Event.h"
 #include "GridMap.h"
 #include "IntensityMap.h"
 #include "ProbabilityMap.h"
