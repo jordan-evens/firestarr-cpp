@@ -3,7 +3,7 @@
 #define FS_MODEL_H
 #include "../stdafx.h"
 #include "../grid/Environment.h"
-#include "../Perimeter.h"
+#include "../grid/Perimeter.h"
 #include "../unstable.h"
 #include "../wx/FireWeather.h"
 #include "Iteration.h"
