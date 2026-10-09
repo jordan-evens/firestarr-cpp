@@ -3,9 +3,9 @@
 #include "../fuel/FuelLookup.h"
 #include "../fuel/FuelType.h"
 #include "../log/Log.h"
-#include "../LookupTable.h"
 #include "../sim/Settings.h"
 #include "../unstable.h"
+#include "../util/LookupTable.h"
 #include "SpreadAlgorithm.h"
 namespace fs
 {
