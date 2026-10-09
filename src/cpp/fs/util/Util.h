@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_UTIL_H
 #define FS_UTIL_H
-#include "stdafx.h"
+#include "../stdafx.h"
 #include <filesystem>
-#include "types/Radians.h"
+#include "../types/Radians.h"
 namespace fs
 {
 constexpr YearSize TM_YEAR_OFFSET = 1900;

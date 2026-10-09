@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "FireWeather.h"
-#include "../Util.h"
+#include "../util/Util.h"
 #ifdef DEBUG_FWI_WEATHER
 #include "../Log.h"
 #endif

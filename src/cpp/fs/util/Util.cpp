@@ -1,8 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
 #include "Util.h"
 #include <regex>
-#include "Log.h"
+#include "../Log.h"
 #include "TimeUtil.h"
 namespace fs
 {
