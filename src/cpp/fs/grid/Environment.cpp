@@ -4,7 +4,7 @@
 #include "../fuel/FuelType.h"
 #include "../geo/Point.h"
 #include "../Log.h"
-#include "../Settings.h"
+#include "../sim/Settings.h"
 #include "../types/Location.h"
 #include "../types/Radians.h"
 #include "../Util.h"

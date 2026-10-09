@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "FuelType.h"
 #include "../Log.h"
-#include "../Settings.h"
+#include "../sim/Settings.h"
 #include "../Survival.h"
 #include "Greenup.h"
 namespace fs::fuel

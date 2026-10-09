@@ -1,17 +1,17 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Test.h"
-#include "fuel/FuelLookup.h"
-#include "fuel/FuelType.h"
-#include "types/Location.h"
-#include "wx/FireWeather.h"
-#include "FireSpread.h"
-#include "Log.h"
+#include "../FireSpread.h"
+#include "../fuel/FuelLookup.h"
+#include "../fuel/FuelType.h"
+#include "../Log.h"
+#include "../SafeVector.h"
+#include "../types/Location.h"
+#include "../Util.h"
+#include "../wx/FireWeather.h"
 #include "Model.h"
 #include "Observer.h"
-#include "SafeVector.h"
 #include "Settings.h"
-#include "Util.h"
 namespace fs
 {
 using namespace fuel;

@@ -3,7 +3,7 @@
 #include "FireBehaviourPrediction.h"
 #include "../FireSpread.h"
 #include "../LookupTable.h"
-#include "../Settings.h"
+#include "../sim/Settings.h"
 #include "../Survival.h"
 #include "../wx/FireWeatherIndices.h"
 #include "Greenup.h"
