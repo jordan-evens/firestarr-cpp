@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_SAFE_VECTOR_H
 #define FS_SAFE_VECTOR_H
-#include "stdafx.h"
+#include "../stdafx.h"
 namespace fs
 {
 class Statistics;
