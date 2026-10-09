@@ -1,11 +1,11 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_EVENT_H
 #define FS_EVENT_H
-#include "stdafx.h"
+#include "../stdafx.h"
 #include <compare>
-#include "grid/Cell.h"
-#include "types/Location.h"
-#include "wx/WeatherIndices.h"
+#include "../grid/Cell.h"
+#include "../types/Location.h"
+#include "../wx/WeatherIndices.h"
 namespace fs
 {
 using fs::Direction;

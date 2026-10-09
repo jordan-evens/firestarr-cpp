@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_ITERATION_H
 #define FS_ITERATION_H
-#include "stdafx.h"
-#include "types/Location.h"
-#include "SafeVector.h"
+#include "../stdafx.h"
+#include "../SafeVector.h"
+#include "../types/Location.h"
 namespace fs
 {
 class ProbabilityMap;
