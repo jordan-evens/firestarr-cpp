@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "Model.h"
 #include "../fuel/Greenup.h"
+#include "../grid/Perimeter.h"
 #include "../grid/ProbabilityMap.h"
 #include "../Input.h"
 #include "../Log.h"
-#include "../Perimeter.h"
 #include "../rng.h"
 #include "../types/Location.h"
 #include "../wx/FireWeather.h"
