@@ -1,8 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
 #include "rng.h"
-#include "sim/Settings.h"
-#include "Log.h"
+#include "../Log.h"
+#include "Settings.h"
 namespace fs::rng
 {
 void make_threshold(

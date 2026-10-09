@@ -8,12 +8,12 @@
 #include "../grid/Perimeter.h"
 #include "../grid/ProbabilityMap.h"
 #include "../Log.h"
-#include "../rng.h"
 #include "../spread/CellPoints.h"
 #include "../spread/FireSpread.h"
 #include "../spread/PointSpread.h"
 #include "../types/Location.h"
 #include "Observer.h"
+#include "rng.h"
 #include "Settings.h"
 namespace fs
 {
