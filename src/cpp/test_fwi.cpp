@@ -2,7 +2,7 @@
 #include "fs/ArgumentParser.h"
 #include "fs/Log.h"
 #include "fs/unstable.h"
-#include "fs/Util.h"
+#include "fs/util/Util.h"
 #include "fs/wx/FwiReference.h"
 #include "fs/wx/WeatherIndices.h"
 #include "test_fwi/FwiOld.h"

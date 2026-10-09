@@ -4,7 +4,7 @@
 #include "../stdafx.h"
 #include "../grid/Cell.h"
 #include "../Log.h"
-#include "../Util.h"
+#include "../util/Util.h"
 #include "FuelType.h"
 namespace fs::fuel
 {

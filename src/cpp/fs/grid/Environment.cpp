@@ -7,7 +7,7 @@
 #include "../sim/Settings.h"
 #include "../types/Location.h"
 #include "../types/Radians.h"
-#include "../Util.h"
+#include "../util/Util.h"
 #include "EnvironmentInfo.h"
 #include "Grid.h"
 #include "ProbabilityMap.h"

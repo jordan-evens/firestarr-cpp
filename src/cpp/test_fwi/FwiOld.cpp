@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "FwiOld.h"
 #include "../fs/Log.h"
-#include "../fs/Util.h"
+#include "../fs/util/Util.h"
 #include "../fs/wx/Moisture.h"
 #include "../fs/wx/WeatherIndices.h"
 // adapted from http://www.columbia.edu/~rf2426/index_files/FWI.vba

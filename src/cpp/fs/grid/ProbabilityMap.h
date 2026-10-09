@@ -5,7 +5,7 @@
 #include "../Perimeter.h"
 #include "../sim/Settings.h"
 #include "../Statistics.h"
-#include "../Util.h"
+#include "../util/Util.h"
 #include "GridMap.h"
 namespace fs
 {

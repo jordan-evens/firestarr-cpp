@@ -7,7 +7,7 @@
 #include "../SafeVector.h"
 #include "../spread/FireSpread.h"
 #include "../types/Location.h"
-#include "../Util.h"
+#include "../util/Util.h"
 #include "../wx/FireWeather.h"
 #include "Model.h"
 #include "Observer.h"
