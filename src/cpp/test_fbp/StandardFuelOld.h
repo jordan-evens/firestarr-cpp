@@ -238,10 +238,8 @@ public:
    * \param fmc Foliar Moisture Content
    * \return Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
    */
-  [[nodiscard]] static constexpr MathSize crownRateOfSpread(
-    const MathSize isi,
-    const MathSize fmc
-  ) noexcept
+  // HACK: not constexpr because arm chip sees difference win non-constexpr
+  [[nodiscard]] static MathSize crownRateOfSpread(const MathSize isi, const MathSize fmc) noexcept
   {
     return STANDARD_FOLIAR_MOISTURE_ISI(isi) * STANDARD_FOLIAR_MOISTURE_FMC(fmc);
   }
