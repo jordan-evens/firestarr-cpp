@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "StandardFuel.h"
-#include "../LookupTable.h"
+#include "../util/LookupTable.h"
 namespace fs::fuel
 {
 /**
