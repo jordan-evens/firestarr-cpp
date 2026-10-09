@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "SafeVector.h"
-#include "Log.h"
-#include "Statistics.h"
+#include "../Log.h"
+#include "../Statistics.h"
 namespace fs
 {
 SafeVector::SafeVector(const SafeVector& rhs) : values_(rhs.values_) { }

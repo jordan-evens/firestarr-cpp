@@ -2,7 +2,7 @@
 #ifndef FS_ITERATION_H
 #define FS_ITERATION_H
 #include "../stdafx.h"
-#include "../SafeVector.h"
+#include "../data/SafeVector.h"
 #include "../types/Location.h"
 namespace fs
 {
