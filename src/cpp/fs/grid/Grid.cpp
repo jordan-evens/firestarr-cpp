@@ -1,13 +1,12 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
 #include "Grid.h"
 #include <geo_normalize.h>
 #include <tiffio.h>
 #include <xtiffio.h>
-#include "geo/projection.h"
-#include "Log.h"
+#include "../geo/projection.h"
+#include "../Log.h"
+#include "../unstable.h"
 #include "tiff.h"
-#include "unstable.h"
 using fs::Idx;
 namespace fs
 {
