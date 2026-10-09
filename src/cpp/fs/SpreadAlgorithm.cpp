@@ -2,8 +2,8 @@
 #include "stdafx.h"
 #include "SpreadAlgorithm.h"
 #include "fuel/FuelType.h"
+#include "util/Util.h"
 #include "FireSpread.h"
-#include "Util.h"
 #ifdef DEBUG_POINTS
 #include "Log.h"
 #endif

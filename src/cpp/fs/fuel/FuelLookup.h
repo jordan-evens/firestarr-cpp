@@ -3,7 +3,7 @@
 #define FS_FUEL_LOOKUP_H
 #include "../stdafx.h"
 #include "../grid/Cell.h"
-#include "../Util.h"
+#include "../util/Util.h"
 namespace fs::fuel
 {
 class FuelType;
