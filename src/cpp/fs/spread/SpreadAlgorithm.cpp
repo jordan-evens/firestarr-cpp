@@ -4,7 +4,7 @@
 #include "../util/Util.h"
 #include "FireSpread.h"
 #ifdef DEBUG_POINTS
-#include "../Log.h"
+#include "../log/Log.h"
 #endif
 namespace fs
 {

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "Duff.h"
-#include "../Log.h"
+#include "../log/Log.h"
 namespace fs::testing
 {
 int compare_duff(const duff::Duff& a, const duff::Duff& b)

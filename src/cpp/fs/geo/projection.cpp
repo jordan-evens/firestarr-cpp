@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "projection.h"
 #include <proj.h>
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../sim/Settings.h"
 #include "../types/Radians.h"
 #include "../unstable.h"

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "FwiOld.h"
-#include "../fs/Log.h"
+#include "../fs/log/Log.h"
 #include "../fs/util/Util.h"
 #include "../fs/wx/Moisture.h"
 #include "../fs/wx/WeatherIndices.h"

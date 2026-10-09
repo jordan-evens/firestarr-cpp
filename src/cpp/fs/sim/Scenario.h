@@ -3,7 +3,7 @@
 #define FS_SCENARIO_H
 #include "../stdafx.h"
 #include "../grid/IntensityMap.h"
-#include "../LogPoints.h"
+#include "../log/LogPoints.h"
 #include "../spread/CellPoints.h"
 #include "../spread/SpreadCache.h"
 #include "../types/Location.h"

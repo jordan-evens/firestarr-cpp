@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "EnvironmentInfo.h"
 #include "../geo/Point.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../sim/Settings.h"
 #include "Environment.h"
 #include "Grid.h"

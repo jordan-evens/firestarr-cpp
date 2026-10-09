@@ -3,7 +3,7 @@
 #include <geo_normalize.h>
 #include <tiffio.h>
 #include <xtiffio.h>
-#include "../Log.h"
+#include "../log/Log.h"
 #include "tiff.h"
 namespace fs
 {
