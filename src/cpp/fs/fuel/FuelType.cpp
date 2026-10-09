@@ -2,8 +2,8 @@
 #include "FuelType.h"
 #include "../Log.h"
 #include "../sim/Settings.h"
-#include "../Survival.h"
 #include "Greenup.h"
+#include "Survival.h"
 namespace fs::fuel
 {
 MathSize fire_intensity(const MathSize fc, const MathSize ros) { return 300.0 * fc * ros; }

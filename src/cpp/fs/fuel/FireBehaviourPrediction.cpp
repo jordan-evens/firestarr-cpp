@@ -4,9 +4,9 @@
 #include "../LookupTable.h"
 #include "../sim/Settings.h"
 #include "../spread/FireSpread.h"
-#include "../Survival.h"
 #include "../wx/FireWeatherIndices.h"
 #include "Greenup.h"
+#include "Survival.h"
 #ifdef DEBUG_FUEL_VARIABLE
 #include "../Log.h"
 #endif
