@@ -48,6 +48,7 @@ services:
       - seccomp:unconfined
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
+      - /etc/ca-certificates:/etc/ca-certificates
       - ~/.ssh:/home/user/.ssh
       - ./repo/.bash_aliases:/home/user/.bash_aliases
       - type: bind
@@ -74,6 +75,7 @@ services:
       - seccomp:unconfined
     volumes:
       - /etc/ssl/certs:/etc/ssl/certs
+      - /etc/ca-certificates:/etc/ca-certificates
       - ~/.ssh:/home/user/.ssh
       - ./repo/.bash_aliases:/home/user/.bash_aliases
       - type: bind
