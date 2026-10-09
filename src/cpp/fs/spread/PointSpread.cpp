@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
 #include "PointSpread.h"
-#include "sim/Scenario.h"
+#include "../sim/Scenario.h"
 #include "FireSpread.h"
 namespace fs
 {

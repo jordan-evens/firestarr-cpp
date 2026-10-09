@@ -1,12 +1,12 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "FireSpread.h"
-#include "fuel/FuelLookup.h"
-#include "fuel/FuelType.h"
-#include "sim/Settings.h"
-#include "Log.h"
-#include "LookupTable.h"
+#include "../fuel/FuelLookup.h"
+#include "../fuel/FuelType.h"
+#include "../Log.h"
+#include "../LookupTable.h"
+#include "../sim/Settings.h"
+#include "../unstable.h"
 #include "SpreadAlgorithm.h"
-#include "unstable.h"
 namespace fs
 {
 using namespace fs::fuel;

@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_SPREAD_CACHE_H
 #define FS_SPREAD_CACHE_H
-#include "stdafx.h"
-#include "grid/Cell.h"
+#include "../stdafx.h"
+#include "../grid/Cell.h"
 #include "FireSpread.h"
 namespace fs
 {
