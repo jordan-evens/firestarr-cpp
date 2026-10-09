@@ -2,9 +2,7 @@
 #include "Log.h"
 #include <tiffio.h>
 #ifdef NDEBUG
-#ifdef _WIN32
-#include "TimeUtil.h"
-#endif
+#include "../util/TimeUtil.h"
 #endif
 #ifndef DEBUG_NOEXCEPT_OFF
 #error DEBUG_NOEXCEPT_OFF not defined
@@ -115,7 +113,7 @@ inline string format_log_message(const char* prefix, const string msg)
 #ifdef NDEBUG
   tm out{};
   const time_t now = time(nullptr);
-  if (!localtime_r(&now, &out))
+  if (!fs::localtime_r(&now, &out))
   {
     logging::fatal("Error formatting time {}", now);
   }

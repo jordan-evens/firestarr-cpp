@@ -4,8 +4,11 @@
 #include <ctime>
 namespace fs
 {
+// HACK: define in std since not on windows
 #ifdef _WIN32
 struct tm* localtime_r(const time_t* timer, struct tm* result);
+#else
+using ::localtime_r;
 #endif
 /**
  * \brief Calculate tm fields from values already there
