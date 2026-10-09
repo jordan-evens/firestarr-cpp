@@ -2,8 +2,8 @@
 #include "FuelType.h"
 #include "../Log.h"
 #include "../sim/Settings.h"
-#include "../Survival.h"
 #include "Greenup.h"
+#include "Survival.h"
 namespace fs::fuel
 {
 string simplify_fuel_name(const string_view fuel)
