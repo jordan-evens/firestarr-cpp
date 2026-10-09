@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_CONSTANT_GRID_H
 #define FS_CONSTANT_GRID_H
-#include "stdafx.h"
-#include "types/Location.h"
+#include "../stdafx.h"
+#include "../types/Location.h"
+#include "../Util.h"
 #include "Grid.h"
-#include "Util.h"
 namespace fs
 {
 template <class T, class V>

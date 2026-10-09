@@ -3,7 +3,7 @@
 #include <geo_normalize.h>
 #include <tiffio.h>
 #include <xtiffio.h>
-#include "Log.h"
+#include "../Log.h"
 namespace fs
 {
 TIFF* GeoTiffOpen(const char* const filename, const char* const mode)

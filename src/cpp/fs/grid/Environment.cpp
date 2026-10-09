@@ -1,17 +1,16 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
 #include "Environment.h"
-#include "fuel/FuelLookup.h"
-#include "fuel/FuelType.h"
-#include "geo/Point.h"
-#include "types/Location.h"
-#include "types/Radians.h"
+#include "../fuel/FuelLookup.h"
+#include "../fuel/FuelType.h"
+#include "../geo/Point.h"
+#include "../Log.h"
+#include "../Settings.h"
+#include "../types/Location.h"
+#include "../types/Radians.h"
+#include "../Util.h"
 #include "EnvironmentInfo.h"
 #include "Grid.h"
-#include "Log.h"
 #include "ProbabilityMap.h"
-#include "Settings.h"
-#include "Util.h"
 namespace fs
 {
 Environment Environment::load(

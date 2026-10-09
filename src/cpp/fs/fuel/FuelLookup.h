@@ -2,7 +2,7 @@
 #ifndef FS_FUEL_LOOKUP_H
 #define FS_FUEL_LOOKUP_H
 #include "../stdafx.h"
-#include "../Cell.h"
+#include "../grid/Cell.h"
 #include "../Util.h"
 namespace fs::fuel
 {

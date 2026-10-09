@@ -2,8 +2,8 @@
 #ifndef FS_MODEL_H
 #define FS_MODEL_H
 #include "stdafx.h"
+#include "grid/Environment.h"
 #include "wx/FireWeather.h"
-#include "Environment.h"
 #include "Iteration.h"
 #include "Perimeter.h"
 #include "Settings.h"
