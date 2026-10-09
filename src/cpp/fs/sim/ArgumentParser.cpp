@@ -1,8 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "ArgumentParser.h"
-#include "sim/Settings.h"
-#include "util/Util.h"
-#include "Log.h"
+#include "../Log.h"
+#include "../util/Util.h"
 namespace fs::settings
 {
 static map<std::string, std::function<void()>> PARSE_FCT{};
