@@ -1,17 +1,17 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_SCENARIO_H
 #define FS_SCENARIO_H
-#include "stdafx.h"
-#include "grid/IntensityMap.h"
-#include "types/Location.h"
-#include "wx/FireWeather.h"
-#include "CellPoints.h"
-#include "LogPoints.h"
+#include "../stdafx.h"
+#include "../CellPoints.h"
+#include "../grid/IntensityMap.h"
+#include "../LogPoints.h"
+#include "../SpreadCache.h"
+#include "../TimeUtil.h"
+#include "../types/Location.h"
+#include "../wx/FireWeather.h"
 #include "Model.h"
 #include "Settings.h"
-#include "SpreadCache.h"
 #include "StartPoint.h"
-#include "TimeUtil.h"
 namespace fs
 {
 class IObserver;

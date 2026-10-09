@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
+#include "fs/stdafx.h"
 #include "fs/ArgumentParser.h"
 #include "fs/Log.h"
 #include "fs/rng.h"
-#include "fs/StartPoint.h"
-#include "fs/stdafx.h"
+#include "fs/sim/StartPoint.h"
 namespace fs::testing
 {
 int test_rng(const int argc, const char* const argv[])
