@@ -1,12 +1,12 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_PROBABILITY_MAP_H
 #define FS_PROBABILITY_MAP_H
-#include "stdafx.h"
+#include "../stdafx.h"
+#include "../Perimeter.h"
+#include "../Settings.h"
+#include "../Statistics.h"
+#include "../Util.h"
 #include "GridMap.h"
-#include "Perimeter.h"
-#include "Settings.h"
-#include "Statistics.h"
-#include "Util.h"
 namespace fs
 {
 using settings::Settings;
