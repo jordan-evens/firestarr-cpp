@@ -33,24 +33,41 @@ public:
   TestResults& operator=(const TestResults& rhs) noexcept = delete;
   TestResults& operator=(TestResults&& rhs) noexcept
   {
-    add(std::move(rhs));
+    std::scoped_lock lock(mutex_, rhs.mutex_);
+    add_locked(std::move(rhs));
     return *this;
   }
   void add(std::future<int>&& f) noexcept
   {
     std::scoped_lock lock(mutex_);
-    logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
-    results_.push_back(std::move(f));
+    add_locked(std::move(f));
   };
   void add(const auto& fct, auto... args) noexcept
   {
     std::scoped_lock lock(mutex_);
     logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
-    add(std::async(launch::async, fct, args...));
+    add_locked(std::async(launch::async, fct, args...));
   };
   void add(TestResults&& rhs) noexcept
   {
     std::scoped_lock lock(mutex_, rhs.mutex_);
+    add_locked(std::move(rhs));
+  };
+  std::future<int> value() noexcept
+  {
+    std::scoped_lock lock(mutex_);
+    return value_locked();
+  }
+
+private:
+  // assume mutex is already locked in private functions
+  void add_locked(std::future<int>&& f) noexcept
+  {
+    logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
+    results_.push_back(std::move(f));
+  };
+  void add_locked(TestResults&& rhs) noexcept
+  {
     logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
     if (rhs.finalized_)
     {
@@ -70,15 +87,12 @@ public:
       rhs.results_.clear();
     }
   };
-  std::future<int> value() noexcept
+  std::future<int> value_locked() noexcept
   {
     return std::async(launch::async, &TestResults::calculate_value, this);
   }
-
-private:
   int calculate_value() noexcept
   {
-    std::scoped_lock lock(mutex_);
     if (!finalized_)
     {
       for (auto& result : results_)
@@ -95,7 +109,7 @@ private:
     }
     return return_value_;
   }
-  mutable std::recursive_mutex mutex_{};
+  mutable mutex mutex_{};
   std::vector<TestResult> results_{};
   bool finalized_{false};
   int return_value_{0};
