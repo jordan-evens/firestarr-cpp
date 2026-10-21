@@ -2,11 +2,11 @@
 #ifndef FS_PROBABILITY_MAP_H
 #define FS_PROBABILITY_MAP_H
 #include "../stdafx.h"
-#include "../Perimeter.h"
 #include "../sim/Settings.h"
 #include "../Statistics.h"
 #include "../util/Util.h"
 #include "GridMap.h"
+#include "Perimeter.h"
 namespace fs
 {
 using settings::Settings;
