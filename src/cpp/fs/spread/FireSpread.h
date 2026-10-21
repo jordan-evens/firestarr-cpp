@@ -30,7 +30,7 @@ static constexpr MathSize INVALID_INTENSITY = -1.0;
 /**
  * \brief Possible results of an attempt to spread.
  */
-enum SpreadResult
+enum class SpreadResult
 {
   SPREAD_TOO_SLOW,
   SPREAD_IMPOSSIBLE,
