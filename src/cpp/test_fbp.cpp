@@ -98,13 +98,14 @@ private:
       for (auto& result : results_)
       {
         result.wait();
+        logging::check_fatal(!result.valid(), "invalid result");
         if (auto cmp = result.get(); 0 == return_value_ && 0 != cmp)
         {
           // HACK: keep first value to return but need to wait for every future
           return_value_ = cmp;
         }
       }
-      logging::debug("Have {:d} results", results_.size());
+      logging::info("Have {:d} results", results_.size());
       finalized_ = true;
       results_.clear();
     }
