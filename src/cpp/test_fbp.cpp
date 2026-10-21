@@ -3,11 +3,11 @@
 #include <future>
 #include <mutex>
 #include "fs/ArgumentParser.h"
+#include "fs/data/RangeIterator.h"
 #include "fs/fuel/FireBehaviourPrediction.h"
 #include "fs/fuel/FuelLookup.h"
 #include "fs/fuel/FuelType.h"
 #include "fs/Log.h"
-#include "fs/RangeIterator.h"
 #include "fs/spread/FireSpread.h"
 #include "test_fbp/FBPOld.h"
 #include "test_fbp/FuelOldLookup.h"

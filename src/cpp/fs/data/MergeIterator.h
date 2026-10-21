@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_MERGE_ITERATOR_H
 #define FS_MERGE_ITERATOR_H
-#include "stdafx.h"
+#include "../stdafx.h"
 namespace fs
 {
 // mangled version of std::transform_reduce() that calls .begin() and .end()
