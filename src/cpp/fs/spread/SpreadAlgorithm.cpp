@@ -1,11 +1,10 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
 #include "SpreadAlgorithm.h"
-#include "fuel/FuelType.h"
+#include "../fuel/FuelType.h"
+#include "../Util.h"
 #include "FireSpread.h"
-#include "Util.h"
 #ifdef DEBUG_POINTS
-#include "Log.h"
+#include "../Log.h"
 #endif
 namespace fs
 {
