@@ -2,8 +2,6 @@
 #include "TimeUtil.h"
 #include "../Log.h"
 #include "Util.h"
-namespace fs
-{
 #ifdef _WIN32
 struct tm* gmtime_r(const time_t* timer, struct tm* result)
 {
@@ -22,6 +20,12 @@ struct tm* localtime_r(const time_t* timer, struct tm* result)
   return result;
 }
 #endif
+namespace fs
+{
+struct tm* get_localtime(const time_t* timer, struct tm* result)
+{
+  return localtime_r(timer, result);
+}
 time_t fix_utc(tm* t)
 {
   // HACK: just use UTC since tz is not used
