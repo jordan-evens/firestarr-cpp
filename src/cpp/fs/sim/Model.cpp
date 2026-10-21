@@ -3,7 +3,7 @@
 #include "../fuel/Greenup.h"
 #include "../grid/Perimeter.h"
 #include "../grid/ProbabilityMap.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../types/Location.h"
 #include "../util/TimeUtil.h"
 #include "../wx/FireWeather.h"

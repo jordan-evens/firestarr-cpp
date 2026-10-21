@@ -4,7 +4,7 @@
 #include "../data/SafeVector.h"
 #include "../fuel/FuelLookup.h"
 #include "../fuel/FuelType.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../spread/FireSpread.h"
 #include "../types/Location.h"
 #include "../util/Util.h"

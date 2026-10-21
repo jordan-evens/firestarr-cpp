@@ -2,7 +2,7 @@
 #include "FireWeather.h"
 #include "../util/TimeUtil.h"
 #ifdef DEBUG_FWI_WEATHER
-#include "../Log.h"
+#include "../log/Log.h"
 #endif
 #include "Moisture.h"
 namespace fs

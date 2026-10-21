@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "Settings.h"
 #include "../fuel/FuelLookup.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../util/TimeUtil.h"
 #include "../util/Trim.h"
 #include "../util/Util.h"
@@ -169,7 +169,8 @@ Settings::Settings(const string dir_binary, const string dir_root) noexcept
       dir_settings = dir_binary;
       filename = default_settings;
       // logging::note(
-      //   "Copying default settings from {:s} to {:s}", default_settings.c_str(), filename.c_str()
+      //   "Copying default settings from {:s} to {:s}", default_settings.c_str(),
+      //   filename.c_str()
       // );
       // make_directory_recursive(dir_root_.c_str());
       // std::filesystem::copy(default_settings, filename);

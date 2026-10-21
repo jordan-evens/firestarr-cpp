@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "TimeUtil.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "Util.h"
 #ifdef _WIN32
 struct tm* gmtime_r(const time_t* timer, struct tm* result)

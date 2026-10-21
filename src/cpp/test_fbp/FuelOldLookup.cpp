@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "FuelOldLookup.h"
-#include "../fs/Log.h"
+#include "../fs/log/Log.h"
 #include "../fs/sim/Settings.h"
 #include "FBPOld.h"
 namespace fs::fuelold

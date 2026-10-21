@@ -2,7 +2,7 @@
 #include "Log.h"
 #include <tiffio.h>
 #ifdef NDEBUG
-#include "util/TimeUtil.h"
+#include "../util/TimeUtil.h"
 #endif
 #ifndef DEBUG_NOEXCEPT_OFF
 #error DEBUG_NOEXCEPT_OFF not defined

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "fs/stdafx.h"
-#include "fs/Log.h"
+#include "fs/log/Log.h"
 #include "fs/sim/ArgumentParser.h"
 #include "fs/sim/rng.h"
 #include "fs/sim/StartPoint.h"

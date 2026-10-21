@@ -7,7 +7,7 @@
 #include "../grid/IntensityMap.h"
 #include "../grid/Perimeter.h"
 #include "../grid/ProbabilityMap.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../spread/CellPoints.h"
 #include "../spread/FireSpread.h"
 #include "../spread/PointSpread.h"
