@@ -5,11 +5,11 @@
 #include "../grid/ProbabilityMap.h"
 #include "../Input.h"
 #include "../Log.h"
-#include "../rng.h"
 #include "../types/Location.h"
 #include "../util/TimeUtil.h"
 #include "../wx/FireWeather.h"
 #include "Observer.h"
+#include "rng.h"
 #include "Scenario.h"
 #include "Settings.h"
 namespace fs
