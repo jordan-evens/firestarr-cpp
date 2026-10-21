@@ -31,48 +31,27 @@ public:
   TestResults(const TestResults& rhs) noexcept = delete;
   TestResults(TestResults&& rhs) noexcept { add(std::move(rhs)); }
   TestResults& operator=(const TestResults& rhs) noexcept = delete;
-  TestResults& operator=(TestResults&& rhs) noexcept
-  {
-    std::scoped_lock lock(mutex_, rhs.mutex_);
-    add_locked(std::move(rhs));
-    return *this;
-  }
+  TestResults& operator=(TestResults&& rhs) noexcept = delete;
   void add(std::future<int>&& f) noexcept
   {
     std::scoped_lock lock(mutex_);
-    add_locked(std::move(f));
+    logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
+    results_.push_back(std::move(f));
   };
   void add(const auto& fct, auto... args) noexcept
   {
-    std::scoped_lock lock(mutex_);
-    logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
-    add_locked(std::async(launch::async, fct, args...));
+    // don't lock this until results are calculated
+    add(std::async(launch::async, fct, args...));
   };
   void add(TestResults&& rhs) noexcept
   {
     std::scoped_lock lock(mutex_, rhs.mutex_);
-    add_locked(std::move(rhs));
-  };
-  std::future<int> value() noexcept
-  {
-    std::scoped_lock lock(mutex_);
-    return value_locked();
-  }
-
-private:
-  // assume mutex is already locked in private functions
-  void add_locked(std::future<int>&& f) noexcept
-  {
-    logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
-    results_.push_back(std::move(f));
-  };
-  void add_locked(TestResults&& rhs) noexcept
-  {
     logging::check_fatal(finalized_, "TestResults were already finalized but trying to add more");
     if (rhs.finalized_)
     {
+      // if finalized then results were cleared
       logging::check_fatal(
-        rhs.results_.empty(), "TestResults were finalized but still have results to check"
+        !rhs.results_.empty(), "TestResults were finalized but still have results to check"
       );
       // keep first non-zero value
       if (0 == return_value_)
@@ -87,12 +66,16 @@ private:
       rhs.results_.clear();
     }
   };
-  std::future<int> value_locked() noexcept
+  std::future<int> value() noexcept
   {
+    // don't lock here since calculate_value() needs the lock there
     return std::async(launch::async, &TestResults::calculate_value, this);
   }
+
+private:
   int calculate_value() noexcept
   {
+    std::scoped_lock lock(mutex_);
     if (!finalized_)
     {
       for (auto& result : results_)
