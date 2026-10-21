@@ -2,8 +2,8 @@
 #ifndef FS_FBP_H
 #define FS_FBP_H
 #include "../stdafx.h"
-#include "../LookupTable.h"
 #include "../sim/Settings.h"
+#include "../util/LookupTable.h"
 #include "Duff.h"
 #include "FuelType.h"
 #include "Greenup.h"

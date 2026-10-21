@@ -2,8 +2,8 @@
 #ifndef FS_STANDARD_FUEL_H
 #define FS_STANDARD_FUEL_H
 #include "../stdafx.h"
-#include "../LogValue.h"
-#include "../LookupTable.h"
+#include "../util/LogValue.h"
+#include "../util/LookupTable.h"
 #include "FuelType.h"
 namespace fs::fuel
 {

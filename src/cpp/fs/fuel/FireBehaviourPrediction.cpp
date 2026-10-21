@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "../stdafx.h"
 #include "FireBehaviourPrediction.h"
-#include "../LookupTable.h"
 #include "../sim/Settings.h"
 #include "../spread/FireSpread.h"
+#include "../util/LookupTable.h"
 #include "../wx/FireWeatherIndices.h"
 #include "Greenup.h"
 #include "Survival.h"
