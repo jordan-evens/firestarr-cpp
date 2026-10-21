@@ -104,6 +104,7 @@ private:
           return_value_ = cmp;
         }
       }
+      logging::debug("Have {:d} results", results_.size());
       finalized_ = true;
       results_.clear();
     }
@@ -339,7 +340,7 @@ auto compare_spread(
       {
         cout << "]\n";
       }
-      logging::debug("compare_spread() == 0 with {:d} comparisons", count_comparisons);
+      logging::verbose("compare_spread() == 0 with {:d} comparisons", count_comparisons);
       return 0;
     }
   );
