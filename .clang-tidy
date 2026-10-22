@@ -116,4 +116,5 @@ HeaderFilterRegex: ''
 FormatStyle:     file
 ExtraArgs:
     - -std=c++2b
+    - -stdlib=libc++
     - -Wno-unknown-warning-option
