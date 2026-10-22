@@ -135,7 +135,7 @@ private:
   ptr<const FwiWeatherImpl> lookup(const FwiWeatherImpl& wx) noexcept
   {
     // keep unique FwiWeatherImpl and then just do pointer comparison for equality
-    lock_guard<mutex> lock(mutex_);
+    scoped_lock lock(mutex_);
     static set<FwiWeatherImpl> fwi_values{};
     static const FwiWeatherImpl empty{};
     if (empty == wx)

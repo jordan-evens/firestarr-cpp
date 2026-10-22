@@ -41,7 +41,7 @@ public:
    */
   void notify()
   {
-    std::unique_lock<std::mutex> l(mutex_);
+    unique_lock l(mutex_);
     --used_;
     cv_.notify_one();
   }
@@ -50,7 +50,7 @@ public:
    */
   void wait()
   {
-    std::unique_lock<std::mutex> l(mutex_);
+    unique_lock l(mutex_);
     cv_.wait(l, [this] { return used_ <= limit_; });
     ++used_;
   }

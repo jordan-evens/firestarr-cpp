@@ -109,7 +109,7 @@ Scenario* Scenario::reset_with_new_start(const XYIdx& start_xy, ptr<SafeVector> 
   ++COUNT;
   {
     // want a global count of how many times this scenario ran
-    std::lock_guard<std::mutex> lk(MUTEX_SIM_COUNTS);
+    scoped_lock lk(MUTEX_SIM_COUNTS);
     simulation_ = ++SIM_COUNTS[id_];
   }
   return this;
@@ -162,7 +162,7 @@ Scenario* Scenario::reset(
   ++COUNT;
   {
     // want a global count of how many times this scenario ran
-    std::lock_guard<std::mutex> lk(MUTEX_SIM_COUNTS);
+    scoped_lock lk(MUTEX_SIM_COUNTS);
     simulation_ = ++SIM_COUNTS[id_];
   }
   return this;

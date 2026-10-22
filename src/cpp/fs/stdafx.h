@@ -49,7 +49,6 @@
 #include "unstable.h"
 namespace fs
 {
-// HACK: avoid warning about unused include
 using fs::debug::show_debug_settings;
 using std::abs;
 using std::array;
@@ -67,7 +66,6 @@ using std::ifstream;
 using std::istringstream;
 using std::launch;
 using std::list;
-using std::lock_guard;
 using std::make_shared;
 using std::make_tuple;
 using std::make_unique;
@@ -83,6 +81,7 @@ using std::ostringstream;
 using std::pair;
 using std::put_time;
 using std::runtime_error;
+using std::scoped_lock;
 using std::set;
 using std::setprecision;
 using std::shared_ptr;
@@ -96,6 +95,7 @@ using std::to_string;
 using std::to_wstring;
 using std::tuple;
 using std::uniform_real_distribution;
+using std::unique_lock;
 using std::unique_ptr;
 using std::unordered_map;
 using std::vector;
