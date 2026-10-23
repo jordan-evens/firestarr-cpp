@@ -13,6 +13,17 @@
 namespace fs::fuel
 {
 using settings::Settings;
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize bui
+) noexcept
+{
+  return 5.0 * (1.0 - exp(-0.0115 * bui));
+}
+static const LookupTable<&calculate_surface_fuel_consumption_mixed_or_c2>
+  SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2{};
+MathSize surface_fuel_consumption_mixed_or_c2(const MathSize bui) noexcept
+{
+  return SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2(bui);
+}
 MathSize FuelD1::isfD1(const SpreadInfo& spread, const MathSize ros_multiplier, const MathSize isi)
   const noexcept
 {
@@ -41,7 +52,7 @@ MathSize FuelC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 }
 MathSize FuelC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2(spread.weather.bui().value);
+  return surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
 }
 MathSize FuelC6::finalRos(
   const SpreadInfo& spread,

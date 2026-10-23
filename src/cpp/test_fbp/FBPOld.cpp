@@ -2,6 +2,17 @@
 #include "FBPOld.h"
 namespace fs::fuelold
 {
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize bui
+) noexcept
+{
+  return 5.0 * (1.0 - exp(-0.0115 * bui));
+}
+static const LookupTable<&calculate_surface_fuel_consumption_mixed_or_c2>
+  SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2{};
+MathSize surface_fuel_consumption_mixed_or_c2(const MathSize bui) noexcept
+{
+  return SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2(bui);
+}
 MathSize FuelOldD1::isfD1(
   const SpreadInfo& spread,
   const MathSize ros_multiplier,
@@ -33,7 +44,7 @@ MathSize FuelOldC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexc
 }
 MathSize FuelOldC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2(spread.weather.bui().value);
+  return surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
 }
 MathSize FuelOldC6::finalRos(
   const SpreadInfo& spread,

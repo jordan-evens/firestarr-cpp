@@ -11,13 +11,7 @@
 #endif
 namespace fs::fuelold
 {
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize bui
-) noexcept
-{
-  return 5.0 * (1.0 - exp(-0.0115 * bui));
-}
-static const LookupTable<&calculate_surface_fuel_consumption_mixed_or_c2>
-  SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2{};
+[[nodiscard]] MathSize surface_fuel_consumption_mixed_or_c2(const MathSize bui) noexcept;
 [[nodiscard]] static MathSize calculate_surface_fuel_consumption_d1(const MathSize bui) noexcept
 {
   return 1.5 * (1.0 - exp(-0.0183 * bui));
@@ -346,7 +340,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return SURFACE_FUEL_CONSUMPTION_MIXED_OR_C2(spread.weather.bui().value);
+    return surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
   }
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66, pg 38]
