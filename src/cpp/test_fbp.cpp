@@ -162,7 +162,7 @@ auto compare_spread(
     // offsets are in fraction of a cell per minute
     const auto offset{o.offset};
     cout << std::format(
-      " ({:d} kW/m; {:0.6f} m/min @{:03d} == ({:g}, {:g}))\n",
+      " ({:d} kW/m; {:0.6f} m/min @{:03d} == ({:20g}, {:20g}))\n",
       intensity,
       ros,
       direction.asDegreesSize(),
