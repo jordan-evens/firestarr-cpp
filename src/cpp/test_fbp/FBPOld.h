@@ -11,8 +11,9 @@
 #endif
 namespace fs::fuelold
 {
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize b) noexcept;
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_d1(const MathSize b) noexcept;
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_mixed_or_c2(const RoundedValue& bui
+) noexcept;
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_d1(const RoundedValue& bui) noexcept;
 /**
  * \brief A StandardFuel that is not made of multiple fuels.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -153,7 +154,8 @@ protected:
  * \param bui Build-up Index
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
  */
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_jackpine(const MathSize b) noexcept;
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_jackpine(const RoundedValue& bui
+) noexcept;
 /**
  * \brief A fuel with jackpine as base fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -191,7 +193,7 @@ public:
  * \param bui Build-up Index
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
  */
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_pine(const MathSize b) noexcept;
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_pine(const RoundedValue& bui) noexcept;
 /**
  * \brief A fuel with pine as the base fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -454,13 +456,13 @@ public:
 /**
  * \brief Length to Breadth ratio [ST-X-3 eq 80/81]
  */
-[[nodiscard]] MathSize calculate_length_to_breadth_grass(const MathSize w) noexcept;
+[[nodiscard]] MathSize calculate_length_to_breadth_grass(const RoundedValue& ws) noexcept;
 /**
  * \brief Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
  * \param curing Grass fuel curing rate (%)
  * \return Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
  */
-[[nodiscard]] MathSize calculate_base_multiplier_curing(const MathSize c) noexcept;
+[[nodiscard]] MathSize calculate_base_multiplier_curing(const RoundedValue& curing) noexcept;
 /**
  * \brief A grass fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
