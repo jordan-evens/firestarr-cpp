@@ -36,13 +36,15 @@ static constexpr int START_GREENING = -43;
                           : static_cast<int>(52.5042 - 1.07324 * nd);
   return max(0, min(100, curing));
 }
-[[nodiscard]] constexpr MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize bui
+[[nodiscard]] constexpr MathSize calculate_surface_fuel_consumption_mixed_or_c2(const MathSize b
 ) noexcept
 {
+  const auto bui = round_value(b);
   return 5.0 * (1.0 - exp(-0.0115 * bui));
 }
-[[nodiscard]] constexpr MathSize calculate_surface_fuel_consumption_d1(const MathSize bui) noexcept
+[[nodiscard]] constexpr MathSize calculate_surface_fuel_consumption_d1(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return 1.5 * (1.0 - exp(-0.0183 * bui));
 }
 /**
@@ -185,9 +187,9 @@ protected:
  * \param bui Build-up Index
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_jackpine(const MathSize bui
-) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_jackpine(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return 5.0 * pow(1.0 - exp(-0.0164 * bui), 2.24);
 }
 /**
@@ -227,8 +229,9 @@ public:
  * \param bui Build-up Index
  * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_pine(const MathSize bui) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_pine(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return 5.0 * pow(1.0 - exp(-0.0149 * bui), 2.48);
 }
 /**
@@ -491,8 +494,9 @@ public:
 /**
  * \brief Length to Breadth ratio [ST-X-3 eq 80/81]
  */
-[[nodiscard]] static MathSize calculate_length_to_breadth_grass(const MathSize ws) noexcept
+[[nodiscard]] static MathSize calculate_length_to_breadth_grass(const MathSize w) noexcept
 {
+  const auto ws = round_value(w);
   return ws < 1.0 ? 1.0 : (1.1 * pow(ws, 0.464));
 }
 /**
@@ -500,8 +504,9 @@ public:
  * \param curing Grass fuel curing rate (%)
  * \return Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
  */
-[[nodiscard]] static MathSize calculate_base_multiplier_curing(const MathSize curing) noexcept
+[[nodiscard]] static MathSize calculate_base_multiplier_curing(const MathSize c) noexcept
 {
+  const auto curing = round_value(c);
   return (curing >= 58.8) ? (0.176 + 0.02 * (curing - 58.8)) : (0.005 * expm1(0.061 * curing));
 }
 /**

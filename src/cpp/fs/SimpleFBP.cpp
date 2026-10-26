@@ -29,8 +29,9 @@ MathSize SimpleFuelD1::isfD1(
  * \param ffmc Fine SimpleFuel Moisture Code
  * \return Surface SimpleFuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c1(const MathSize ffmc) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c1(const MathSize f) noexcept
 {
+  const auto ffmc = round_value(f);
   return max(0.0, 0.75 + ((ffmc > 84) ? 0.75 : -0.75) * sqrt(1 - exp(-0.23 * abs(ffmc - 84))));
 }
 MathSize SimpleFuelC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
@@ -57,17 +58,18 @@ MathSize SimpleFuelC6::finalRos(
  * \param ffmc Fine SimpleFuel Moisture Code
  * \return Forest Floor Consumption (FFC) (kg/m^2) [ST-X-3 eq 13]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_ffmc(const MathSize ffmc
-) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_ffmc(const MathSize f) noexcept
 {
+  const auto ffmc = round_value(f);
   return (ffmc > 70) ? 2.0 * (1.0 - exp(-0.104 * (ffmc - 70.0))) : 0.0;
 }
 /**
  * \brief Woody SimpleFuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
  * \return Woody SimpleFuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
  */
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_bui(const MathSize bui) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_c7_bui(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return 1.5 * (1.0 - exp(-0.0201 * bui));
 }
 MathSize SimpleFuelC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
@@ -75,8 +77,9 @@ MathSize SimpleFuelC7::surfaceFuelConsumption(const SpreadInfo& spread) const no
   return calculate_surface_fuel_consumption_c7_ffmc(spread.weather->ffmc.value)
        + calculate_surface_fuel_consumption_c7_bui(spread.weather->bui.value);
 }
-[[nodiscard]] static MathSize calculate_surface_fuel_consumption_d2(const MathSize bui) noexcept
+[[nodiscard]] static MathSize calculate_surface_fuel_consumption_d2(const MathSize b) noexcept
 {
+  const auto bui = round_value(b);
   return bui >= 80 ? 1.5 * (1.0 - exp(-0.0183 * bui)) : 0.0;
 }
 MathSize SimpleFuelD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
