@@ -13,20 +13,26 @@ namespace fs::fuel
 using fs::fuel::calculate_grass_curing;
 using fs::fuel::DEFAULT_GRASS_FUEL_LOAD;
 using settings::Settings;
-// Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 10]
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_mixed_or_c2(const RoundedValue& bui
-) noexcept;
-// Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 25]
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_d1(const RoundedValue& bui) noexcept;
 // Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_jackpine(const RoundedValue& bui
-) noexcept;
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_jackpine(const LookupValue& bui) noexcept;
 // Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_pine(const RoundedValue& bui) noexcept;
-// Length to Breadth ratio [ST-X-3 eq 80/81]
-[[nodiscard]] MathSize calculate_length_to_breadth_grass(const RoundedValue& ws) noexcept;
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_pine(const LookupValue& bui) noexcept;
+// Surface Fuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_c1(const LookupValue& ffmc) noexcept;
+// Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 10]
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_mixed_or_c2(const LookupValue& bui
+) noexcept;
+// Forest Floor Consumption (FFC) (kg/m^2) [ST-X-3 eq 13]
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_c7_ffmc(const LookupValue& ffmc) noexcept;
+// Woody Fuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_c7_bui(const LookupValue& bui) noexcept;
+// Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 25]
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_d1(const LookupValue& bui) noexcept;
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_d2(const LookupValue& bui) noexcept;
 // Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
-[[nodiscard]] MathSize calculate_base_multiplier_curing(const RoundedValue& curing) noexcept;
+[[nodiscard]] MathSize calculate_base_multiplier_curing(const LookupValue& curing) noexcept;
+// Length to Breadth ratio [ST-X-3 eq 80/81]
+[[nodiscard]] MathSize calculate_length_to_breadth_grass(const LookupValue& ws) noexcept;
 /**
  * \brief A StandardFuel that is not made of multiple fuels.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]

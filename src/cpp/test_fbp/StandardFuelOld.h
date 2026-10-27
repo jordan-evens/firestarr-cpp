@@ -15,20 +15,20 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
  * \param fmc Foliar Moisture Content (FMC)
  * \return Standard foliar moisture effect (FME) based on FMC [ST-X-3 eq 61]
  */
-[[nodiscard]] MathSize calculate_standard_foliar_moisture_fmc(const RoundedValue& fmc) noexcept;
+[[nodiscard]] MathSize calculate_standard_foliar_moisture_fmc(const LookupValue& fmc) noexcept;
 /**
  * \brief Crown fire spread rate (m/min) / Foliar Moisture Effect (RSC / (FME / FME_avg)) [ST-X-3 eq
  * 64]
  * \param isi Initial Spread Index
  * \return RSC / (FME / FME_avg) [ST-X-3 eq 64]
  */
-[[nodiscard]] MathSize calculate_standard_foliar_moisture_isi(const RoundedValue& isi) noexcept;
+[[nodiscard]] MathSize calculate_standard_foliar_moisture_isi(const LookupValue& isi) noexcept;
 /**
  * \brief Length to Breadth ratio [ST-X-3 eq 79]
  * \param ws Wind Speed (km/h)
  * \return Length to Breadth ratio [ST-X-3 eq 79]
  */
-[[nodiscard]] MathSize calculate_standard_length_to_breadth(const RoundedValue& ws) noexcept;
+[[nodiscard]] MathSize calculate_standard_length_to_breadth(const LookupValue& ws) noexcept;
 /**
  * \brief A FuelBase made of a standard fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -218,7 +218,8 @@ public:
     const MathSize fmc
   ) noexcept
   {
-    return calculate_standard_foliar_moisture_isi(isi)
+    // HACK: convert back to double to instantiate as LookupValue
+    return calculate_standard_foliar_moisture_isi(isi.value)
          * calculate_standard_foliar_moisture_fmc(fmc);
   }
   [[nodiscard]] constexpr MathSize logQ() const noexcept { return log_q_.value; }
