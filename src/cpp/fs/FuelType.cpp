@@ -63,11 +63,11 @@ MathSize InvalidFuel::crownConsumption(MathSize) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
-MathSize InvalidFuel::calculateRos(const int, const FwiWeather&, MathSize) const
+MathSize InvalidFuel::calculateRos(const int, const FwiWeather&, const RoundedValue&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
-MathSize InvalidFuel::calculateIsf(const SpreadInfo&, MathSize) const
+MathSize InvalidFuel::calculateIsf(const SpreadInfo&, const RoundedValue&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
@@ -79,7 +79,7 @@ MathSize InvalidFuel::lengthToBreadth(MathSize) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
-MathSize InvalidFuel::finalRos(const SpreadInfo&, MathSize, MathSize, MathSize) const
+MathSize InvalidFuel::finalRos(const SpreadInfo&, const RoundedValue&, MathSize, MathSize) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }

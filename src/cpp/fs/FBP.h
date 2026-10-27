@@ -13,9 +13,20 @@ namespace fs::fuel
 using fs::fuel::calculate_grass_curing;
 using fs::fuel::DEFAULT_GRASS_FUEL_LOAD;
 using settings::Settings;
+// Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 10]
 [[nodiscard]] MathSize calculate_surface_fuel_consumption_mixed_or_c2(const RoundedValue& bui
 ) noexcept;
+// Surface Fuel Consumption (SFC) (kg/m^2) [ST-X-3 eq 25]
 [[nodiscard]] MathSize calculate_surface_fuel_consumption_d1(const RoundedValue& bui) noexcept;
+// Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_jackpine(const RoundedValue& bui
+) noexcept;
+// Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
+[[nodiscard]] MathSize calculate_surface_fuel_consumption_pine(const RoundedValue& bui) noexcept;
+// Length to Breadth ratio [ST-X-3 eq 80/81]
+[[nodiscard]] MathSize calculate_length_to_breadth_grass(const RoundedValue& ws) noexcept;
+// Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
+[[nodiscard]] MathSize calculate_base_multiplier_curing(const RoundedValue& curing) noexcept;
 /**
  * \brief A StandardFuel that is not made of multiple fuels.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -116,7 +127,7 @@ public:
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    */
-  [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const MathSize isi)
+  [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
     const noexcept override
   {
     return this->limitIsf(
@@ -128,7 +139,8 @@ public:
    * \param isi Initial Spread Index
    * \return Initial rate of spread (m/min) [ST-X-3 eq 26]
    */
-  MathSize calculateRos(const int, const FwiWeather&, const MathSize isi) const noexcept override
+  MathSize calculateRos(const int, const FwiWeather&, const RoundedValue& isi)
+    const noexcept override
   {
     return this->rosBasic(isi);
   }
@@ -239,13 +251,6 @@ protected:
   { }
 };
 /**
- * \brief Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
- * \param bui Build-up Index
- * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 11]
- */
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_jackpine(const RoundedValue& bui
-) noexcept;
-/**
  * \brief A fuel with jackpine as base fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
  * \tparam B Rate of spread parameter b * 10000 [ST-X-3 table 6]
@@ -323,12 +328,6 @@ public:
     return calculate_surface_fuel_consumption_jackpine(spread.weather->bui.value);
   }
 };
-/**
- * \brief Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
- * \param bui Build-up Index
- * \return Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 12]
- */
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_pine(const RoundedValue& bui) noexcept;
 /**
  * \brief A fuel with pine as the base fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -442,8 +441,11 @@ public:
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
    */
-  [[nodiscard]] MathSize isfD1(const SpreadInfo& spread, MathSize ros_multiplier, MathSize isi)
-    const noexcept;
+  [[nodiscard]] MathSize isfD1(
+    const SpreadInfo& spread,
+    MathSize ros_multiplier,
+    const RoundedValue& isi
+  ) const noexcept;
 };
 /**
  * \brief A mixedwood fuel type.
@@ -531,7 +533,7 @@ public:
    * \param isi Initial Spread Index
    * \return Calculate rate of spread (m/min) [ST-X-3 27/28, GLC-X-10 29/31]
    */
-  [[nodiscard]] MathSize calculateRos(const int, const FwiWeather&, const MathSize isi)
+  [[nodiscard]] MathSize calculateRos(const int, const FwiWeather&, const RoundedValue& isi)
     const noexcept override
   {
     static const FuelD1 F{14};
@@ -544,7 +546,7 @@ public:
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 42]
    */
-  [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const MathSize isi)
+  [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
     const noexcept override
   {
     return ratioConifer() * this->limitIsf(1.0, spread.slopeFactor() * this->rosBasic(isi))
@@ -578,7 +580,7 @@ protected:
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
    */
-  [[nodiscard]] MathSize isfD1(const SpreadInfo& spread, const MathSize isi) const noexcept
+  [[nodiscard]] MathSize isfD1(const SpreadInfo& spread, const RoundedValue& isi) const noexcept
   {
     static const FuelD1 F{14};
     return F.isfD1(spread, rosMultiplier(), isi);
@@ -661,16 +663,6 @@ public:
              * calculate_surface_fuel_consumption_d1(spread.weather->bui.value);
   }
 };
-/**
- * \brief Length to Breadth ratio [ST-X-3 eq 80/81]
- */
-[[nodiscard]] MathSize calculate_length_to_breadth_grass(const RoundedValue& ws) noexcept;
-/**
- * \brief Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
- * \param curing Grass fuel curing rate (%)
- * \return Base multiplier for rate of spread [GLC-X-10 eq 35a/35b]
- */
-[[nodiscard]] MathSize calculate_base_multiplier_curing(const RoundedValue& curing) noexcept;
 /**
  * \brief A grass fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
@@ -758,7 +750,7 @@ public:
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    */
-  [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const MathSize isi)
+  [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
     const noexcept override
   {
     const auto mu = baseMultiplier(spread.nd(), *spread.weather);
@@ -773,7 +765,7 @@ public:
    * \param isi Initial Spread Index (may differ from wx because of slope)
    * \return Rate of spread (m/min)
    */
-  [[nodiscard]] MathSize calculateRos(const int nd, const FwiWeather& wx, const MathSize isi)
+  [[nodiscard]] MathSize calculateRos(const int nd, const FwiWeather& wx, const RoundedValue& isi)
     const noexcept override
   {
     return calculateRos(baseMultiplier(nd, wx), isi);
@@ -797,7 +789,8 @@ public:
    * \param isi Initial Spread Index (may differ from wx because of slope)
    * \return Rate of spread (m/min)
    */
-  [[nodiscard]] MathSize calculateRos(const MathSize multiplier, const MathSize isi) const noexcept
+  [[nodiscard]] MathSize calculateRos(const MathSize multiplier, const RoundedValue& isi)
+    const noexcept
   {
     return multiplier * this->rosBasic(isi);
   }
@@ -974,7 +967,7 @@ protected:
    */
   [[nodiscard]] MathSize finalRos(
     const SpreadInfo& spread,
-    MathSize isi,
+    const RoundedValue& isi,
     MathSize cfb,
     MathSize rss
   ) const noexcept override;
@@ -1038,7 +1031,7 @@ public:
    * \param isi Initial Spread Index (may differ from wx because of slope)
    * \return Rate of spread (m/min)
    */
-  [[nodiscard]] MathSize calculateRos(int nd, const FwiWeather& wx, MathSize isi)
+  [[nodiscard]] MathSize calculateRos(int nd, const FwiWeather& wx, const RoundedValue& isi)
     const noexcept override;
 };
 /**
@@ -1468,7 +1461,8 @@ public:
    * \param isi Initial Spread Index
    * \return Initial rate of spread (m/min) [ST-X-3 eq 26]
    */
-  [[nodiscard]] MathSize calculateRos(const int, const FwiWeather&, const MathSize) const override
+  [[nodiscard]] MathSize calculateRos(const int, const FwiWeather&, const RoundedValue&)
+    const override
   {
     throw runtime_error("FuelVariable not resolved to specific type");
   }
@@ -1478,7 +1472,7 @@ public:
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41]
    */
-  [[nodiscard]] MathSize calculateIsf(const SpreadInfo&, const MathSize) const override
+  [[nodiscard]] MathSize calculateIsf(const SpreadInfo&, const RoundedValue&) const override
   {
     throw runtime_error("FuelVariable not resolved to specific type");
   }
@@ -1510,8 +1504,12 @@ public:
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
    * \return Final rate of spread (m/min)
    */
-  [[nodiscard]] MathSize finalRos(const SpreadInfo&, const MathSize, const MathSize, const MathSize)
-    const override
+  [[nodiscard]] MathSize finalRos(
+    const SpreadInfo&,
+    const RoundedValue&,
+    const MathSize,
+    const MathSize
+  ) const override
   {
     throw runtime_error("FuelVariable not resolved to specific type");
   }

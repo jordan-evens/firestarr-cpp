@@ -30,7 +30,7 @@ MathSize calculate_surface_fuel_consumption_jackpine(const RoundedValue& bui) no
 MathSize FuelOldD1::isfD1(
   const SpreadInfo& spread,
   const MathSize ros_multiplier,
-  const MathSize isi
+  const RoundedValue& isi
 ) const noexcept
 {
   return limitIsf(
@@ -57,7 +57,7 @@ MathSize FuelOldC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexc
 }
 MathSize FuelOldC6::finalRos(
   const SpreadInfo& spread,
-  const MathSize isi,
+  const RoundedValue& isi,
   const MathSize cfb,
   const MathSize rss
 ) const noexcept
@@ -96,7 +96,8 @@ MathSize FuelOldD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexc
 {
   return calculate_surface_fuel_consumption_d2(spread.weather->bui.value);
 }
-MathSize FuelOldD2::calculateRos(const int, const FwiWeather& wx, const MathSize isi) const noexcept
+MathSize FuelOldD2::calculateRos(const int, const FwiWeather& wx, const RoundedValue& isi)
+  const noexcept
 {
   return (wx.bui.value >= 80) ? rosBasic(isi) : 0.0;
 }
