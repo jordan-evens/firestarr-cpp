@@ -33,7 +33,7 @@ static constexpr MathSize DEFAULT_GRASS_FUEL_LOAD = 0.35;
  * \param ros Rate of spread (m/min)
  * \return Fire Intensity (kW/m) [ST-X-3 eq 69]
  */
-[[nodiscard]] constexpr MathSize fire_intensity(const MathSize fc, const MathSize ros)
+[[nodiscard]] constexpr MathSize fire_intensity(const RoundedValue& fc, const RoundedValue& ros)
 {
   return 300.0 * fc * ros;
 }
@@ -71,7 +71,10 @@ public:
    * \param csi Critical Surface Fire Intensity (CSI) (kW/m) [ST-X-3 eq 56]
    * \return Critical rate of spread (m/min)
    */
-  [[nodiscard]] static constexpr MathSize criticalRos(const MathSize sfc, const MathSize csi)
+  [[nodiscard]] static constexpr MathSize criticalRos(
+    const RoundedValue& sfc,
+    const RoundedValue& csi
+  )
   {
     return sfc > 0 ? csi / (300.0 * sfc) : 0.0;
   }
@@ -81,7 +84,7 @@ public:
    * \param sfi Surface Fire Intensity (kW/m)
    * \return Whether or not this is a crown fire
    */
-  [[nodiscard]] static constexpr bool isCrown(const MathSize csi, const MathSize sfi)
+  [[nodiscard]] static constexpr bool isCrown(const RoundedValue& csi, const RoundedValue& sfi)
   {
     return sfi > csi;
   }
@@ -129,13 +132,17 @@ public:
    * \param rso Critical surface fire spread rate (RSO) [ST-X-3 eq 57]
    * \return Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    */
-  [[nodiscard]] virtual MathSize crownFractionBurned(MathSize rss, MathSize rso) const noexcept = 0;
+  [[nodiscard]] virtual MathSize crownFractionBurned(
+    const RoundedValue& rss,
+    const RoundedValue& rso
+  ) const noexcept = 0;
   /**
    * \brief Calculate probability of burning [Anderson eq 1]
    * \param mc_fraction moisture content (% / 100)
    * \return Calculate probability of burning [Anderson eq 1]
    */
-  [[nodiscard]] virtual MathSize probabilityPeat(MathSize mc_fraction) const noexcept = 0;
+  [[nodiscard]] virtual MathSize probabilityPeat(const RoundedValue& mc_fraction
+  ) const noexcept = 0;
   /**
    * \brief Survival probability calculated using probability of ony survival based on multiple
    * formulae
@@ -148,13 +155,13 @@ public:
    * \param bui Build-up Index
    * \return BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
    */
-  [[nodiscard]] virtual MathSize buiEffect(MathSize bui) const = 0;
+  [[nodiscard]] virtual MathSize buiEffect(const RoundedValue& bui) const = 0;
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \return Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
    */
-  [[nodiscard]] virtual MathSize crownConsumption(MathSize cfb) const = 0;
+  [[nodiscard]] virtual MathSize crownConsumption(const RoundedValue& cfb) const = 0;
   /**
    * \brief Calculate rate of spread (m/min)
    * \param nd Difference between date and the date of minimum foliar moisture content
@@ -183,7 +190,7 @@ public:
    * \param ws Wind Speed (km/h)
    * \return Length to Breadth ratio [ST-X-3 eq 79]
    */
-  [[nodiscard]] virtual MathSize lengthToBreadth(MathSize ws) const = 0;
+  [[nodiscard]] virtual MathSize lengthToBreadth(const RoundedValue& ws) const = 0;
   /**
    * \brief Final rate of spread (m/min)
    * \param spread SpreadInfo to use
@@ -195,8 +202,8 @@ public:
   [[nodiscard]] virtual MathSize finalRos(
     const SpreadInfo& spread,
     const RoundedValue& isi,
-    MathSize cfb,
-    MathSize rss
+    const RoundedValue& cfb,
+    const RoundedValue& rss
   ) const = 0;
   /**
    * \brief Critical Surface Fire Intensity (CSI) [ST-X-3 eq 56]
@@ -275,12 +282,12 @@ public:
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize buiEffect(MathSize) const override;
+  [[nodiscard]] MathSize buiEffect(const RoundedValue&) const override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize crownConsumption(MathSize) const override;
+  [[nodiscard]] MathSize crownConsumption(const RoundedValue&) const override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
@@ -300,12 +307,13 @@ public:
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize lengthToBreadth(MathSize) const override;
+  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue&) const override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize finalRos(const SpreadInfo&, const RoundedValue&, MathSize, MathSize)
+  [[nodiscard]] MathSize
+  finalRos(const SpreadInfo&, const RoundedValue&, const RoundedValue&, const RoundedValue&)
     const override;
   /**
    * \brief Throw a runtime_error
@@ -316,12 +324,13 @@ public:
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize crownFractionBurned(MathSize, MathSize) const noexcept override;
+  [[nodiscard]] MathSize crownFractionBurned(const RoundedValue&, const RoundedValue&)
+    const noexcept override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] ThresholdSize probabilityPeat(MathSize) const noexcept override;
+  [[nodiscard]] ThresholdSize probabilityPeat(const RoundedValue&) const noexcept override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
@@ -357,9 +366,9 @@ public:
     const FuelCodeSize& code,
     const char* name,
     const bool can_crown,
-    const MathSize bulk_density,
-    const MathSize inorganic_percent,
-    const MathSize duff_depth,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& inorganic_percent,
+    const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
   )
@@ -381,7 +390,7 @@ public:
    * \param rso Critical surface fire spread rate (RSO) [ST-X-3 eq 57]
    * \return Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    */
-  [[nodiscard]] MathSize crownFractionBurned(const MathSize rss, const MathSize rso)
+  [[nodiscard]] MathSize crownFractionBurned(const RoundedValue& rss, const RoundedValue& rso)
     const noexcept override
   {
     // can't burn crown if it doesn't exist
@@ -392,7 +401,8 @@ public:
    * \param mc_fraction moisture content (% / 100)
    * \return Calculate probability of burning [Anderson eq 1]
    */
-  [[nodiscard]] ThresholdSize probabilityPeat(const MathSize mc_fraction) const noexcept override
+  [[nodiscard]] ThresholdSize probabilityPeat(const RoundedValue& mc_fraction
+  ) const noexcept override
   {
     return probability_peat(bulkDensity(), inorganicPercent(), mc_fraction);
   }

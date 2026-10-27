@@ -8,6 +8,7 @@
 #include "Settings.h"
 #include "StandardFuel.h"
 #include "Survival.h"
+#include "unstable.h"
 namespace fs::fuel
 {
 using fs::fuel::calculate_grass_curing;
@@ -61,15 +62,15 @@ protected:
     const char* name,
     const bool can_crown,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize cbh,
-    const MathSize cfl,
-    const MathSize bulk_density,
-    const MathSize inorganic_percent,
-    const MathSize duff_depth,
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& cbh,
+    const MathConstantSize& cfl,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& inorganic_percent,
+    const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
   )
@@ -96,15 +97,15 @@ protected:
     const char* name,
     const bool can_crown,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize cbh,
-    const MathSize cfl,
-    const MathSize bulk_density,
-    const MathSize inorganic_percent,
-    const MathSize duff_depth,
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& cbh,
+    const MathConstantSize& cfl,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& inorganic_percent,
+    const MathConstantSize& duff_depth,
     const Duff* duff
   )
     : FuelNonMixed(
@@ -186,15 +187,15 @@ protected:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize cbh,
-    const MathSize cfl,
-    const MathSize bulk_density,
-    const MathSize inorganic_percent,
-    const MathSize duff_depth,
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& cbh,
+    const MathConstantSize& cfl,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& inorganic_percent,
+    const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
   )
@@ -227,15 +228,15 @@ protected:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize cbh,
-    const MathSize cfl,
-    const MathSize bulk_density,
-    const MathSize inorganic_percent,
-    const MathSize duff_depth,
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& cbh,
+    const MathConstantSize& cfl,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& inorganic_percent,
+    const MathConstantSize& duff_depth,
     const Duff* duff
   )
     : FuelConifer(
@@ -280,14 +281,14 @@ public:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize cbh,
-    const MathSize cfl,
-    const MathSize bulk_density,
-    const MathSize duff_depth,
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& cbh,
+    const MathConstantSize& cfl,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
   )
@@ -312,14 +313,14 @@ public:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize cbh,
-    const MathSize cfl,
-    const MathSize bulk_density,
-    const MathSize duff_depth,
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& cbh,
+    const MathConstantSize& cfl,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& duff_depth,
     const Duff* duff
   )
     : FuelJackpine(code, name, log_q, a, b, c, bui0, cbh, cfl, bulk_density, duff_depth, duff, duff)
@@ -358,14 +359,14 @@ public:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize cbh,
-    const MathSize cfl,
-    const MathSize bulk_density,
-    const MathSize duff_depth,
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& cbh,
+    const MathConstantSize& cfl,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& duff_depth,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
   )
@@ -390,14 +391,14 @@ public:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize cbh,
-    const MathSize cfl,
-    const MathSize bulk_density,
-    const MathSize duff_depth,
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& cbh,
+    const MathConstantSize& cfl,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& duff_depth,
     const Duff* duff
   )
     : FuelPine(code, name, log_q, a, b, c, bui0, cbh, cfl, bulk_density, duff_depth, duff, duff)
@@ -449,7 +450,7 @@ public:
    */
   [[nodiscard]] MathSize isfD1(
     const SpreadInfo& spread,
-    MathSize ros_multiplier,
+    const RoundedValue& ros_multiplier,
     const RoundedValue& isi
   ) const noexcept;
 };
@@ -487,15 +488,15 @@ public:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize ros_multiplier,
-    const MathSize percent_mixed,
-    const MathSize bulk_density,
-    const MathSize inorganic_percent,
-    const MathSize duff_depth
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& ros_multiplier,
+    const MathConstantSize& percent_mixed,
+    const MathConstantSize& bulk_density,
+    const MathConstantSize& inorganic_percent,
+    const MathConstantSize& duff_depth
   )
     : StandardFuel(
         code,
@@ -530,7 +531,7 @@ public:
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \return Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66, pg 38]
    */
-  [[nodiscard]] MathSize crownConsumption(const MathSize cfb) const noexcept override
+  [[nodiscard]] MathSize crownConsumption(const RoundedValue& cfb) const noexcept override
   {
     return ratioConifer() * StandardFuel::crownConsumption(cfb);
   }
@@ -620,12 +621,12 @@ public:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize ros_multiplier,
-    const MathSize percent_dead_fir
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& ros_multiplier,
+    const MathConstantSize& percent_dead_fir
   )
     : FuelMixed(code, name, log_q, a, b, c, bui0, ros_multiplier, percent_dead_fir, 61, 15, 75)
   { }
@@ -652,8 +653,8 @@ public:
   constexpr FuelMixedWood(
     const FuelCodeSize& code,
     const char* name,
-    const MathSize ros_multiplier,
-    const MathSize percent_mixed
+    const MathConstantSize& ros_multiplier,
+    const MathConstantSize& percent_mixed
   )
     : FuelMixed(code, name, LOG_0_80, 110, 282, 150, 50, ros_multiplier, percent_mixed, 108, 25, 50)
   { }
@@ -694,9 +695,9 @@ public:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c
   )
     // HACK: grass assumes no duff (total duff depth == ffmc depth => dmc depth is 0)
     : StandardFuel(
@@ -783,9 +784,9 @@ public:
    * \param ws Wind Speed (km/h)
    * \return Length to Breadth ratio [ST-X-3 eq 80/81]
    */
-  [[nodiscard]] MathSize lengthToBreadth(const MathSize ws) const noexcept override
+  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const noexcept override
   {
-    return calculate_length_to_breadth_grass(ws);
+    return calculate_length_to_breadth_grass(ws.value);
   }
 
 public:
@@ -795,7 +796,7 @@ public:
    * \param isi Initial Spread Index (may differ from wx because of slope)
    * \return Rate of spread (m/min)
    */
-  [[nodiscard]] MathSize calculateRos(const MathSize multiplier, const RoundedValue& isi)
+  [[nodiscard]] MathSize calculateRos(const RoundedValue& multiplier, const RoundedValue& isi)
     const noexcept
   {
     return multiplier * this->rosBasic(isi);
@@ -974,8 +975,8 @@ protected:
   [[nodiscard]] MathSize finalRos(
     const SpreadInfo& spread,
     const RoundedValue& isi,
-    MathSize cfb,
-    MathSize rss
+    const RoundedValue& cfb,
+    const RoundedValue& rss
   ) const noexcept override;
 };
 /**
@@ -1058,7 +1059,11 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelM1(const FuelCodeSize& code, const char* name, const MathSize percent_conifer)
+  constexpr FuelM1(
+    const FuelCodeSize& code,
+    const char* name,
+    const MathConstantSize& percent_conifer
+  )
     : FuelMixedWood(code, name, 10, percent_conifer)
   { }
 };
@@ -1080,7 +1085,11 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelM2(const FuelCodeSize& code, const char* name, const MathSize percent_conifer)
+  constexpr FuelM2(
+    const FuelCodeSize& code,
+    const char* name,
+    const MathConstantSize& percent_conifer
+  )
     : FuelMixedWood(code, name, 2, percent_conifer)
   { }
 };
@@ -1102,7 +1111,11 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelM3(const FuelCodeSize& code, const char* name, const MathSize percent_dead_fir)
+  constexpr FuelM3(
+    const FuelCodeSize& code,
+    const char* name,
+    const MathConstantSize& percent_dead_fir
+  )
     : FuelMixedDead(code, name, LOG_0_80, 120, 572, 140, 50, 10, percent_dead_fir)
   { }
 };
@@ -1124,7 +1137,11 @@ public:
    * \param code Code to identify fuel with
    * \param name Name of the fuel
    */
-  constexpr FuelM4(const FuelCodeSize& code, const char* name, const MathSize percent_dead_fir)
+  constexpr FuelM4(
+    const FuelCodeSize& code,
+    const char* name,
+    const MathConstantSize& percent_dead_fir
+  )
     : FuelMixedDead(code, name, LOG_0_80, 100, 404, 148, 50, 2, percent_dead_fir)
   { }
 };
@@ -1206,15 +1223,15 @@ public:
     const FuelCodeSize& code,
     const char* name,
     const LogValue log_q,
-    const MathSize a,
-    const MathSize b,
-    const MathSize c,
-    const MathSize bui0,
-    const MathSize ffc_a,
-    const MathSize ffc_b,
-    const MathSize wfc_a,
-    const MathSize wfc_b,
-    const MathSize bulk_density,
+    const MathConstantSize& a,
+    const MathConstantSize& b,
+    const MathConstantSize& c,
+    const MathConstantSize& bui0,
+    const MathConstantSize& ffc_a,
+    const MathConstantSize& ffc_b,
+    const MathConstantSize& wfc_a,
+    const MathConstantSize& wfc_b,
+    const MathConstantSize& bulk_density,
     const Duff* duff_ffmc,
     const Duff* duff_dmc
   )
@@ -1419,7 +1436,7 @@ public:
    * \param bui Build-up Index
    * \return BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
    */
-  [[nodiscard]] MathSize buiEffect(MathSize bui) const override
+  [[nodiscard]] MathSize buiEffect(const RoundedValue& bui) const override
   {
     return compare_by_season(*this, [bui](const FuelType& fuel) { return fuel.buiEffect(bui); });
   }
@@ -1454,7 +1471,7 @@ public:
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \return Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
    */
-  [[nodiscard]] MathSize crownConsumption(const MathSize cfb) const override
+  [[nodiscard]] MathSize crownConsumption(const RoundedValue& cfb) const override
   {
     return compare_by_season(*this, [cfb](const FuelType& fuel) {
       return fuel.crownConsumption(cfb);
@@ -1496,7 +1513,7 @@ public:
    * \param ws Wind Speed (km/h)
    * \return Length to Breadth ratio [ST-X-3 eq 79]
    */
-  [[nodiscard]] MathSize lengthToBreadth(const MathSize ws) const override
+  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const override
   {
     return compare_by_season(*this, [ws](const FuelType& fuel) {
       return fuel.lengthToBreadth(ws);
@@ -1510,12 +1527,9 @@ public:
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
    * \return Final rate of spread (m/min)
    */
-  [[nodiscard]] MathSize finalRos(
-    const SpreadInfo&,
-    const RoundedValue&,
-    const MathSize,
-    const MathSize
-  ) const override
+  [[nodiscard]] MathSize
+  finalRos(const SpreadInfo&, const RoundedValue&, const RoundedValue&, const RoundedValue&)
+    const override
   {
     throw runtime_error("FuelVariable not resolved to specific type");
   }
@@ -1534,7 +1548,7 @@ public:
    * \param rso Critical surface fire spread rate (RSO) [ST-X-3 eq 57]
    * \return Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    */
-  [[nodiscard]] MathSize crownFractionBurned(const MathSize rss, const MathSize rso)
+  [[nodiscard]] MathSize crownFractionBurned(const RoundedValue& rss, const RoundedValue& rso)
     const noexcept override
   {
     return spring()->crownFractionBurned(rss, rso);
@@ -1544,7 +1558,7 @@ public:
    * \param mc_fraction moisture content (% / 100)
    * \return Calculate probability of burning [Anderson eq 1]
    */
-  [[nodiscard]] MathSize probabilityPeat(const MathSize mc_fraction) const noexcept override
+  [[nodiscard]] MathSize probabilityPeat(const RoundedValue& mc_fraction) const noexcept override
   {
     return spring()->probabilityPeat(mc_fraction);
   }
@@ -1628,7 +1642,7 @@ public:
     const FuelM1* m1,
     const FuelM2* m2,
     // HACK: to ensure they match for now
-    const MathSize
+    const MathConstantSize&
 #ifndef NDEBUG
       percent_conifer
 #endif
@@ -1665,7 +1679,7 @@ public:
     const FuelM3* m3,
     const FuelM4* m4,
     // HACK: to ensure they match for now
-    const MathSize
+    const MathConstantSize&
 #ifndef NDEBUG
       percent_dead_fir
 #endif

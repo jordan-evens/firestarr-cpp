@@ -52,7 +52,7 @@ MathSize calculate_length_to_breadth_grass(const LookupValue& ws) noexcept
 }
 MathSize FuelD1::isfD1(
   const SpreadInfo& spread,
-  const MathSize ros_multiplier,
+  const RoundedValue& ros_multiplier,
   const RoundedValue& isi
 ) const noexcept
 {
@@ -72,8 +72,8 @@ MathSize FuelC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 MathSize FuelC6::finalRos(
   const SpreadInfo& spread,
   const RoundedValue& isi,
-  const MathSize cfb,
-  const MathSize rss
+  const RoundedValue& cfb,
+  const RoundedValue& rss
 ) const noexcept
 {
   const auto rsc = crownRateOfSpread(isi, spread.foliarMoisture());

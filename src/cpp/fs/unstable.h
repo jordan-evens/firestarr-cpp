@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
+#include <cstdint>
+#include <limits>
 #define _USE_MATH_DEFINES
 #include <cfloat>
 #include <cmath>
@@ -44,7 +46,7 @@ using MathSize = _Float64;
  * \param base Base to raise to power N
  * \return base raised to power N
  */
-template <unsigned int N, class T>
+template <size_t N, class T>
 [[nodiscard]] constexpr T pow_int(const T& base)
 {
   // https://stackoverflow.com/questions/16443682/c-power-of-integer-template-meta-programming
@@ -70,6 +72,8 @@ public:
   constexpr PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
   constexpr operator double() const noexcept { return value; }
 };
+// HACK: less than maximum enough to not overflow
+using MathConstantSize = PreciseValue<9>;
 using RoundedValue = PreciseValue<8>;
 // HACK: use for replicating old LookupTable rounding
 using LookupValue = PreciseValue<1>;

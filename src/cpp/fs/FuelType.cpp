@@ -55,11 +55,11 @@ MathSize InvalidFuel::grass_curing(const int, const FwiWeather&) const
 }
 MathSize InvalidFuel::cbh() const { throw runtime_error("Invalid fuel type in fuel map"); }
 MathSize InvalidFuel::cfl() const { throw runtime_error("Invalid fuel type in fuel map"); }
-MathSize InvalidFuel::buiEffect(MathSize) const
+MathSize InvalidFuel::buiEffect(const RoundedValue&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
-MathSize InvalidFuel::crownConsumption(MathSize) const
+MathSize InvalidFuel::crownConsumption(const RoundedValue&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
@@ -75,11 +75,12 @@ MathSize InvalidFuel::surfaceFuelConsumption(const SpreadInfo&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
-MathSize InvalidFuel::lengthToBreadth(MathSize) const
+MathSize InvalidFuel::lengthToBreadth(const RoundedValue&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
-MathSize InvalidFuel::finalRos(const SpreadInfo&, const RoundedValue&, MathSize, MathSize) const
+MathSize InvalidFuel::
+  finalRos(const SpreadInfo&, const RoundedValue&, const RoundedValue&, const RoundedValue&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
@@ -87,11 +88,11 @@ MathSize InvalidFuel::criticalSurfaceIntensity(const SpreadInfo&) const
 {
   throw runtime_error("Invalid fuel type in fuel map");
 }
-MathSize InvalidFuel::crownFractionBurned(MathSize, MathSize) const noexcept
+MathSize InvalidFuel::crownFractionBurned(const RoundedValue&, const RoundedValue&) const noexcept
 {
   return logging::fatal("Invalid fuel type in fuel map");
 }
-MathSize InvalidFuel::probabilityPeat(MathSize) const noexcept
+MathSize InvalidFuel::probabilityPeat(const RoundedValue&) const noexcept
 {
   return logging::fatal("Invalid fuel type in fuel map");
 }
