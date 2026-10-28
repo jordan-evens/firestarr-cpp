@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
+#define DEBUG_ROUNDING 1
+// #undef DEBUG_ROUNDING
 #include <cinttypes>
 #include <cstdint>
 #include <cstdio>
@@ -87,6 +89,7 @@ class PreciseValue
     //   static_cast<int64_t>(std::numeric_limits<int64_t>::min())
     //   / static_cast<int64_t>(RoundBy * MaxFloatValue)
     // );
+#ifdef DEBUG_ROUNDING
     static constexpr auto MaxValue = MaxFloatValue;
     static constexpr auto MinValue = -MaxFloatValue;
     static constexpr auto MaxIntValue =
@@ -126,7 +129,9 @@ class PreciseValue
       );
       max_recorded = value;
     }
+#endif
     const auto i = static_cast<int64_t>(value * static_cast<MathSize>(RoundBy));
+#ifdef DEBUG_ROUNDING
     // HACK: ensure not out of bounds
     if (MaxIntValue < i || i < MinIntValue)
     {
@@ -140,6 +145,7 @@ class PreciseValue
       );
       exit(-1);
     }
+#endif
     const auto v = static_cast<MathSize>(i) / static_cast<MathSize>(RoundBy);
     return v;
   }
