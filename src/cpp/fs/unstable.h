@@ -3,7 +3,6 @@
 #define FS_UNSTABLE_H
 #define DEBUG_ROUNDING 1
 // #undef DEBUG_ROUNDING
-#include <atomic>
 #include <cinttypes>
 #include <cstdint>
 #include <cstdio>
@@ -125,10 +124,10 @@ class PreciseValue
     }
     if constexpr (RoundByDigits > IntensityDigits)
     {
-      static std::atomic<MathSize> min_recorded{std::numeric_limits<MathSize>::max()};
-      static std::atomic<MathSize> max_recorded{std::numeric_limits<MathSize>::min()};
-      static std::atomic<MathSize> min_magnitude{std::numeric_limits<MathSize>::max()};
-      static std::atomic<MathSize> max_magnitude{std::numeric_limits<MathSize>::min()};
+      static MathSize min_recorded{std::numeric_limits<MathSize>::max()};
+      static MathSize max_recorded{std::numeric_limits<MathSize>::min()};
+      static MathSize min_magnitude{std::numeric_limits<MathSize>::max()};
+      static MathSize max_magnitude{std::numeric_limits<MathSize>::min()};
       if (value < min_recorded)
       {
         // if (min_magnitude > value * 10)
