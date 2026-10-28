@@ -62,12 +62,15 @@ template <size_t N, class T>
 }
 // HACK: force rounding so that precision matches across platforms
 // HACK: float values seem to deviate at 18 digits, but round to have MaxFloatValue not overflow
-static constexpr size_t RoundedDigits{14};
+static constexpr size_t RoundedDigits{15};
+static constexpr size_t RoundedMax{1'000};
 // Can go 300k+ for S3. Don't want to use int but don't need high precision
-static constexpr size_t IntensityDigits{10};
+static constexpr size_t IntensityDigits{12};
+static constexpr size_t IntensityMax{999'999};
 // HACK: use for replicating old LookupTable rounding
 static constexpr size_t LookupDigits{1};
-template <size_t RoundByDigits>
+static constexpr size_t LookupMax{1'000};
+template <size_t RoundByDigits, size_t MaxValueAtLeast>
 class PreciseValue
 {
   static inline MathSize round_value(const MathSize value) noexcept
@@ -76,8 +79,9 @@ class PreciseValue
     static_assert(0 == RoundBy % 10);
     static_assert(10 <= RoundBy);
     static_assert(std::numeric_limits<int64_t>::max() > RoundBy);
+    // digits10 is maximum digits that are guaranteed to convert to/from type, so no need for buffer
     // stay a few decimals from max
-    static constexpr size_t BufferDigits{1};
+    static constexpr size_t BufferDigits{0};
     static_assert(std::numeric_limits<int64_t>::digits10 > (RoundByDigits + BufferDigits));
     // static constexpr size_t Buffer = pow_int<BufferDigits>(10);
     static constexpr int64_t MaxFloatValue{
@@ -89,6 +93,8 @@ class PreciseValue
       static_cast<size_t>(std::numeric_limits<int64_t>::max())
       > (static_cast<size_t>(RoundBy) * static_cast<size_t>(MaxFloatValue))
     );
+    // HACK: at least 1k as maximum possible value
+    static_assert(MaxFloatValue >= MaxValueAtLeast);
     // static constexpr auto MaxValue = static_cast<MathSize>(
     //   static_cast<int64 _t>(std::numeric_limits<int64_t>::max())
     //   / static_cast<int64_t>(RoundBy * MaxFloatValue)
@@ -183,9 +189,9 @@ public:
   PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
   constexpr operator double() const noexcept { return value; }
 };
-using RoundedValue = PreciseValue<RoundedDigits>;
-using RoundedIntensity = PreciseValue<IntensityDigits>;
-using LookupValue = PreciseValue<LookupDigits>;
+using RoundedValue = PreciseValue<RoundedDigits, RoundedMax>;
+using RoundedIntensity = PreciseValue<IntensityDigits, IntensityMax>;
+using LookupValue = PreciseValue<LookupDigits, LookupMax>;
 // HACK: override these so unstable code doesn't change results of functions
 // in debug vs release version
 MathSize cos(const MathSize angle) noexcept;
