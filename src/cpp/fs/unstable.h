@@ -62,11 +62,11 @@ template <size_t N, class T>
 }
 // HACK: force rounding so that precision matches across platforms
 // HACK: float values seem to deviate at 18 digits, but round to have MaxFloatValue not overflow
-static constexpr size_t RoundedDigits = 14;
+static constexpr size_t RoundedDigits{14};
 // Can go 300k+ for S3. Don't want to use int but don't need high precision
-static constexpr size_t IntensityDigits = 10;
+static constexpr size_t IntensityDigits{10};
 // HACK: use for replicating old LookupTable rounding
-static constexpr size_t LookupDigits = 1;
+static constexpr size_t LookupDigits{1};
 template <size_t RoundByDigits>
 class PreciseValue
 {
@@ -77,13 +77,14 @@ class PreciseValue
     static_assert(10 <= RoundBy);
     static_assert(std::numeric_limits<int64_t>::max() > RoundBy);
     // stay a few decimals from max
-    static constexpr size_t BufferDigits = 1;
+    static constexpr size_t BufferDigits{1};
     static_assert(std::numeric_limits<int64_t>::digits10 > (RoundByDigits + BufferDigits));
     // static constexpr size_t Buffer = pow_int<BufferDigits>(10);
-    static constexpr int64_t MaxFloatValue =
+    static constexpr int64_t MaxFloatValue{
       pow_int<std::numeric_limits<int64_t>::digits10 - (RoundByDigits + BufferDigits)>(
         static_cast<int64_t>(10)
-      );
+      )
+    };
     static_assert(
       static_cast<size_t>(std::numeric_limits<int64_t>::max())
       > (static_cast<size_t>(RoundBy) * static_cast<size_t>(MaxFloatValue))
@@ -97,12 +98,14 @@ class PreciseValue
     //   / static_cast<int64_t>(RoundBy * MaxFloatValue)
     // );
 #ifdef DEBUG_ROUNDING
-    static constexpr auto MaxValue = MaxFloatValue;
-    static constexpr auto MinValue = -MaxFloatValue;
-    static constexpr auto MaxIntValue =
-      static_cast<int64_t>(MaxValue * static_cast<MathSize>(RoundBy));
-    static constexpr auto MinIntValue =
-      static_cast<int64_t>(MinValue * static_cast<MathSize>(RoundBy));
+    static constexpr auto MaxValue{MaxFloatValue};
+    static constexpr auto MinValue{-MaxFloatValue};
+    static constexpr auto MaxIntValue{
+      static_cast<int64_t>(MaxValue * static_cast<MathSize>(RoundBy))
+    };
+    static constexpr auto MinIntValue{
+      static_cast<int64_t>(MinValue * static_cast<MathSize>(RoundBy))
+    };
     // HACK: ensure not out of bounds
     if (MaxFloatValue < value || value < -MaxFloatValue)
     {
