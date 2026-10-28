@@ -108,7 +108,7 @@ class PreciseValue
       );
       exit(-1);
     }
-    if constexpr (RoundByDigits > 3)
+    if constexpr (RoundByDigits > 8)
     {
       static std::atomic<MathSize> min_recorded{std::numeric_limits<MathSize>::max()};
       static std::atomic<MathSize> max_recorded{std::numeric_limits<MathSize>::min()};
