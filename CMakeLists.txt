@@ -144,7 +144,7 @@ else()
 endif()
   target_link_libraries(${bin} PUBLIC fs)
 # FIX: wrap anything new that might be breaking windows workflow
-if(LINUX)
+if(NOT WIN32)
   if(ASAN_ARGS)
     target_link_options(${bin} BEFORE PUBLIC ${ASAN_ARGS})
   else()
