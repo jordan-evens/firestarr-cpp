@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "StandardFuelOld.h"
-#include "unstable.h"
+#include "../fs/unstable.h"
 namespace fs::fuelold
 {
 MathSize calculate_standard_foliar_moisture_fmc(const LookupValue& fmc) noexcept

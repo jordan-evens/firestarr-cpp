@@ -2,7 +2,6 @@
 #ifndef FS_STANDARD_FUEL_OLD_H
 #define FS_STANDARD_FUEL_OLD_H
 #include "../fs/LogValue.h"
-#include "../fs/stdafx.h"
 #include "FuelTypeOld.h"
 namespace fs::fuelold
 {

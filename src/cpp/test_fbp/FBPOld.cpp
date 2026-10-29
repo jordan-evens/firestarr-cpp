@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "FBPOld.h"
-#include "unstable.h"
+#include "../fs/unstable.h"
 namespace fs::fuelold
 {
 MathSize calculate_surface_fuel_consumption_jackpine(const LookupValue& bui) noexcept
@@ -56,11 +56,11 @@ MathSize FuelOldD1::isfD1(
 }
 MathSize FuelOldC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return calculate_surface_fuel_consumption_c1(spread.weather->ffmc.value);
+  return calculate_surface_fuel_consumption_c1(spread.weather.ffmc().value);
 }
 MathSize FuelOldC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather->bui.value);
+  return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
 }
 MathSize FuelOldC6::finalRos(
   const SpreadInfo& spread,
@@ -75,16 +75,16 @@ MathSize FuelOldC6::finalRos(
 }
 MathSize FuelOldC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return calculate_surface_fuel_consumption_c7_ffmc(spread.weather->ffmc.value)
-       + calculate_surface_fuel_consumption_c7_bui(spread.weather->bui.value);
+  return calculate_surface_fuel_consumption_c7_ffmc(spread.weather.ffmc().value)
+       + calculate_surface_fuel_consumption_c7_bui(spread.weather.bui().value);
 }
 MathSize FuelOldD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return calculate_surface_fuel_consumption_d2(spread.weather->bui.value);
+  return calculate_surface_fuel_consumption_d2(spread.weather.bui().value);
 }
 MathSize FuelOldD2::calculateRos(const int, const FwiWeather& wx, const RoundedValue& isi)
   const noexcept
 {
-  return (wx.bui.value >= 80) ? rosBasic(isi) : 0.0;
+  return (wx.bui().value >= 80) ? rosBasic(isi) : 0.0;
 }
 }

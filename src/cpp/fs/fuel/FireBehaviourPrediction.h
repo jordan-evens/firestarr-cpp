@@ -1,14 +1,16 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_FBP_H
 #define FS_FBP_H
-#include "stdafx.h"
+#include "../stdafx.h"
+#include "../Settings.h"
+#include "../Survival.h"
 #include "Duff.h"
 #include "FuelType.h"
 #include "Greenup.h"
-#include "Settings.h"
 #include "StandardFuel.h"
-#include "Survival.h"
-#include "unstable.h"
+#ifdef DEBUG_FUEL_VARIABLE
+#include "../Log.h"
+#endif
 namespace fs::fuel
 {
 using fs::fuel::calculate_grass_curing;
@@ -138,7 +140,7 @@ public:
     const noexcept override
   {
     return this->limitIsf(
-      1.0, calculateRos(spread.nd(), *spread.weather, isi) * spread.slopeFactor()
+      1.0, calculateRos(spread.nd(), spread.weather, isi) * spread.slopeFactor()
     );
   }
   /**
@@ -332,7 +334,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return calculate_surface_fuel_consumption_jackpine(spread.weather->bui.value);
+    return calculate_surface_fuel_consumption_jackpine(spread.weather.bui().value);
   }
 };
 /**
@@ -410,7 +412,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return calculate_surface_fuel_consumption_pine(spread.weather->bui.value);
+    return calculate_surface_fuel_consumption_pine(spread.weather.bui().value);
   }
 };
 /**
@@ -439,7 +441,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return calculate_surface_fuel_consumption_d1(spread.weather->bui.value);
+    return calculate_surface_fuel_consumption_d1(spread.weather.bui().value);
   }
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) for D-1 [ST-X-3 eq 41]
@@ -524,7 +526,7 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather->bui.value);
+    return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
   }
   /**
    * \brief Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66, pg 38]
@@ -667,7 +669,7 @@ public:
   {
     return this->ratioConifer() * FuelMixed::surfaceFuelConsumption(spread)
          + this->ratioDeciduous()
-             * calculate_surface_fuel_consumption_d1(spread.weather->bui.value);
+             * calculate_surface_fuel_consumption_d1(spread.weather.bui().value);
   }
 };
 /**
@@ -738,7 +740,7 @@ public:
     {
       return settings.static_curing.value();
     }
-    const auto is_drought = wx.dc.value > 500;
+    const auto is_drought = wx.dc().value > 500;
     return is_drought ? 100 : calculate_grass_curing(nd);
   }
   /**
@@ -760,7 +762,7 @@ public:
   [[nodiscard]] MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
     const noexcept override
   {
-    const auto mu = baseMultiplier(spread.nd(), *spread.weather);
+    const auto mu = baseMultiplier(spread.nd(), spread.weather);
     // prevent divide by 0
     const auto mu_not_zero = max(static_cast<MathSize>(0.001), mu);
     return this->limitIsf(mu_not_zero, calculateRos(mu, isi) * spread.slopeFactor());
@@ -1260,8 +1262,8 @@ public:
    */
   [[nodiscard]] MathSize surfaceFuelConsumption(const SpreadInfo& spread) const noexcept override
   {
-    return ffcA() * (1.0 - exp(ffcB() * spread.weather->bui.value))
-         + wfcA() * (1.0 - exp(wfcB() * spread.weather->bui.value));
+    return ffcA() * (1.0 - exp(ffcB() * spread.weather.bui().value))
+         + wfcA() * (1.0 - exp(wfcB() * spread.weather.bui().value));
   }
 
 private:
