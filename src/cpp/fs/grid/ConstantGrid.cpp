@@ -1,10 +1,10 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "ConstantGrid.h"
 #include <geo_normalize.h>
 #include <tiffio.h>
 #include <xtiffio.h>
-#include "Log.h"
+#include "../Log.h"
 #include "tiff.h"
 namespace fs
 {

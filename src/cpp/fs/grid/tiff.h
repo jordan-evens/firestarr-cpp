@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_TIFF_H
 #define FS_TIFF_H
-#include "stdafx.h"
+#include "../stdafx.h"
 #ifndef TIFFTAG_GDAL_NODATA
 #define TIFFTAG_GDAL_NODATA 42113
 #endif
