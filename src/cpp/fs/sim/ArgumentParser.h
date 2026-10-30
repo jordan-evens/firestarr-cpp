@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_ARGUMENT_PARSER_H
 #define FS_ARGUMENT_PARSER_H
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Settings.h"
 namespace fs::settings
 {

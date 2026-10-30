@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_TEST_H
 #define FS_TEST_H
-#include "grid/Grid.h"
+#include "../grid/Grid.h"
 #include "Settings.h"
 namespace fs
 {

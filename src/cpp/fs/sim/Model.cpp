@@ -1,17 +1,17 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "Model.h"
-#include "fuel/Greenup.h"
-#include "grid/Perimeter.h"
-#include "grid/ProbabilityMap.h"
-#include "types/Location.h"
-#include "wx/FireWeather.h"
-#include "wx/Input.h"
-#include "Log.h"
+#include "../fuel/Greenup.h"
+#include "../grid/Perimeter.h"
+#include "../grid/ProbabilityMap.h"
+#include "../Log.h"
+#include "../TimeUtil.h"
+#include "../types/Location.h"
+#include "../wx/FireWeather.h"
+#include "../wx/Input.h"
 #include "Observer.h"
 #include "rng.h"
 #include "Scenario.h"
 #include "Settings.h"
-#include "TimeUtil.h"
 namespace fs
 {
 using namespace fuel;

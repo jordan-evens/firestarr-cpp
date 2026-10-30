@@ -2,7 +2,7 @@
 #ifndef FS_FBP_H
 #define FS_FBP_H
 #include "../stdafx.h"
-#include "../Settings.h"
+#include "../sim/Settings.h"
 #include "../Survival.h"
 #include "Duff.h"
 #include "FuelType.h"
