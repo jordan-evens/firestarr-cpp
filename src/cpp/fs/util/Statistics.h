@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_STATISTICS_H
 #define FS_STATISTICS_H
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "Util.h"
 #ifdef DEBUG_STATISTICS
 #include "Log.h"

@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "ArgumentParser.h"
 #include "../Log.h"
-#include "../TimeUtil.h"
-#include "../Util.h"
+#include "../util/TimeUtil.h"
+#include "../util/Util.h"
 #include "Settings.h"
 namespace fs::settings
 {
