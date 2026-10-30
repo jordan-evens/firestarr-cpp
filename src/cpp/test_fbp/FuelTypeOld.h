@@ -4,7 +4,7 @@
 #include "../fs/stdafx.h"
 #include "../fs/fuel/Duff.h"
 #include "../fs/fuel/FuelType.h"
-#include "../fs/Survival.h"
+#include "../fs/fuel/Survival.h"
 namespace fs::fuelold
 {
 using fs::duff::Duff;

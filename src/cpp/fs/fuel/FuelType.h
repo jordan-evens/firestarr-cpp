@@ -3,9 +3,9 @@
 #define FS_FUEL_TYPE_H
 #include "../stdafx.h"
 #include "../spread/FireSpread.h"
-#include "../Survival.h"
 #include "../wx/FwiWeather.h"
 #include "Duff.h"
+#include "Survival.h"
 namespace fs::fuel
 {
 using duff::Duff;
