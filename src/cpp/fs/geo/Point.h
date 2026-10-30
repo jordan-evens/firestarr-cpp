@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_POINT_H
 #define FS_POINT_H
-#include "stdafx.h"
+#include "../stdafx.h"
 namespace fs
 {
 /**
@@ -23,7 +23,7 @@ public:
   Point(Point&& rhs) noexcept = default;
   Point& operator=(const Point& rhs) noexcept = default;
   Point& operator=(Point&& rhs) noexcept = default;
-  auto operator<=>(const Point& rhs) const noexcept = default;
+  std::partial_ordering operator<=>(const Point& rhs) const noexcept = default;
   /**
    * \brief Latitude (decimal degrees)
    * \return Latitude (degrees)
