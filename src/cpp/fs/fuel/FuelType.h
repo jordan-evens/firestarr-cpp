@@ -2,7 +2,7 @@
 #ifndef FS_FUEL_TYPE_H
 #define FS_FUEL_TYPE_H
 #include "../stdafx.h"
-#include "../FireSpread.h"
+#include "../spread/FireSpread.h"
 #include "../Survival.h"
 #include "../wx/FwiWeather.h"
 #include "Duff.h"

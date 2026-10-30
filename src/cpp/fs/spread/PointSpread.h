@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_POINT_SPREAD_H
 #define FS_POINT_SPREAD_H
-#include "stdafx.h"
-#include "sim/Scenario.h"
-#include "CellPoints.h"
+#include "../stdafx.h"
+#include "../sim/Scenario.h"
+#include "../spread/CellPoints.h"
 #include "SpreadCache.h"
 namespace fs
 {

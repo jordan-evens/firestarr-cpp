@@ -1,12 +1,12 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_FIRE_SPREAD_H
 #define FS_FIRE_SPREAD_H
-#include "stdafx.h"
-#include "geo/Point.h"
-#include "grid/Cell.h"
-#include "types/Location.h"
-#include "wx/FwiWeather.h"
-#include "wx/WeatherIndices.h"
+#include "../stdafx.h"
+#include "../geo/Point.h"
+#include "../grid/Cell.h"
+#include "../types/Location.h"
+#include "../wx/FwiWeather.h"
+#include "../wx/WeatherIndices.h"
 namespace fs
 {
 namespace fuel
