@@ -8,7 +8,7 @@
 #include "../fs/unstable.h"
 #include "StandardFuelOld.h"
 #ifdef DEBUG_FUEL_VARIABLE
-#include "../fs/Log.h"
+#include "../fs/log/Log.h"
 #endif
 namespace fs::fuelold
 {

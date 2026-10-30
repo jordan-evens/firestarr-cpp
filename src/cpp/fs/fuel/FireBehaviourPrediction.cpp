@@ -5,7 +5,7 @@
 #include "../unstable.h"
 #include "../wx/FireWeatherIndices.h"
 #ifdef DEBUG_FUEL_VARIABLE
-#include "../Log.h"
+#include "../log/Log.h"
 #endif
 namespace fs::fuel
 {

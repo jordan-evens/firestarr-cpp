@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "SpreadCache.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../sim/Scenario.h"
 #include "FireSpread.h"
 namespace fs

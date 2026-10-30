@@ -6,7 +6,7 @@
 #include <tiffio.h>
 #include <xtiffio.h>
 #include "../geo/projection.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../unstable.h"
 #include "tiff.h"
 using fs::Idx;

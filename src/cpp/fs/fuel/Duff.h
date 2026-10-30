@@ -2,7 +2,7 @@
 #ifndef FS_DUFF_H
 #define FS_DUFF_H
 #include "../stdafx.h"
-#include "../Log.h"
+#include "../log/Log.h"
 namespace fs::duff
 {
 /*! \page survival Probability of fire survival
