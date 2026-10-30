@@ -1,8 +1,14 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "Input.h"
+<<<<<<< HEAD:src/cpp/fs/Input.cpp
 #include "wx/FireWeatherIndices.h"
 #include "Log.h"
 #include "Util.h"
+=======
+#include "../Log.h"
+#include "../util/Util.h"
+#include "FireWeatherIndices.h"
+>>>>>>> 1788c53a6b (move Input into wx folder):src/cpp/fs/wx/Input.cpp
 namespace fs
 {
 inline MathSize stod(const string* const str) { return stod(*str); }
