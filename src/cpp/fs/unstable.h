@@ -61,6 +61,12 @@ template <size_t N, class T>
                     : base * pow_int<(N - 1) / 2, T>(base) * pow_int<(N - 1) / 2, T>(base);
 }
 // HACK: force rounding so that precision matches across platforms
+// HACK: float values seem to deviate at 18 digits, but round to have MaxFloatValue not overflow
+static constexpr size_t RoundedDigits = 14;
+// Can go 300k+ for S3. Don't want to use int but don't need high precision
+static constexpr size_t IntensityDigits = 10;
+// HACK: use for replicating old LookupTable rounding
+static constexpr size_t LookupDigits = 1;
 template <size_t RoundByDigits>
 class PreciseValue
 {
@@ -108,7 +114,7 @@ class PreciseValue
       );
       exit(-1);
     }
-    if constexpr (RoundByDigits > 8)
+    if constexpr (RoundByDigits > IntensityDigits)
     {
       static std::atomic<MathSize> min_recorded{std::numeric_limits<MathSize>::max()};
       static std::atomic<MathSize> max_recorded{std::numeric_limits<MathSize>::min()};
@@ -174,12 +180,9 @@ public:
   PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
   constexpr operator double() const noexcept { return value; }
 };
-// HACK: float values seem to deviate at 18 digits, but round to have MaxFloatValue not overflow
-using RoundedValue = PreciseValue<14>;
-// Can go 300k+ for S3. Don't want to use int but don't need high precision
-using RoundedIntensity = PreciseValue<8>;
-// HACK: use for replicating old LookupTable rounding
-using LookupValue = PreciseValue<1>;
+using RoundedValue = PreciseValue<RoundedDigits>;
+using RoundedIntensity = PreciseValue<IntensityDigits>;
+using LookupValue = PreciseValue<LookupDigits>;
 // HACK: override these so unstable code doesn't change results of functions
 // in debug vs release version
 MathSize cos(const MathSize angle) noexcept;
