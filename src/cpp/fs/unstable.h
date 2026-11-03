@@ -43,7 +43,7 @@ class RoundedValue
   constexpr MathSize round_value(const MathSize value) noexcept
   {
     const auto i = static_cast<size_t>(value * 10);
-    const auto v = i / static_cast<MathSize>(10);
+    const auto v = static_cast<MathSize>(i) / static_cast<MathSize>(10);
     return v;
   }
 
