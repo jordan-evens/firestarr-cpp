@@ -4,7 +4,7 @@
 #include "../stdafx.h"
 #include "Util.h"
 #ifdef DEBUG_STATISTICS
-#include "../Log.h"
+#include "../log/Log.h"
 #endif
 namespace fs
 {

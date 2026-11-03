@@ -3,7 +3,7 @@
 #define FS_GRID_H
 #include "../stdafx.h"
 #include "../geo/Point.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../sim/Settings.h"
 #include "../types/Location.h"
 #include "tiff.h"

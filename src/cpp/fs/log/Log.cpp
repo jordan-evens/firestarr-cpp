@@ -3,7 +3,7 @@
 #include <tiffio.h>
 #ifdef NDEBUG
 #ifdef _WIN32
-#include "util/TimeUtil.h"
+#include "../util/TimeUtil.h"
 #endif
 #endif
 #ifndef DEBUG_NOEXCEPT_OFF

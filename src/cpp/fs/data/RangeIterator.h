@@ -2,7 +2,7 @@
 #ifndef FS_RANGE_ITERATOR_H
 #define FS_RANGE_ITERATOR_H
 #include "../stdafx.h"
-#include "../Log.h"
+#include "../log/Log.h"
 // HACK: don't use until logging causing issues with constexpr is fixed
 #undef DEBUG_ITERATOR
 namespace fs

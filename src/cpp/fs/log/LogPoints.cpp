@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "LogPoints.h"
+#include "../unstable.h"
 #include "Log.h"
-#include "unstable.h"
 #define LOG_POINTS_RELATIVE
 // #undef LOG_POINTS_RELATIVE
 #define LOG_POINTS_CELL

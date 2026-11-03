@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "Input.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../util/Util.h"
 #include "FireWeatherIndices.h"
 namespace fs

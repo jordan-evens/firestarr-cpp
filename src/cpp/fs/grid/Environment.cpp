@@ -3,7 +3,7 @@
 #include "Environment.h"
 #include "../fuel/FuelLookup.h"
 #include "../geo/Point.h"
-#include "../Log.h"
+#include "../log/Log.h"
 #include "../sim/Settings.h"
 #include "../types/Location.h"
 #include "../types/Radians.h"
