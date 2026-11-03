@@ -1,6 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
+#include <cfenv>
+#include <stdexcept>
 #define CHECK_ROUNDING 1
 // #undef CHECK_ROUNDING
 #define DEBUG_ROUNDING 1
@@ -18,6 +20,11 @@
 #ifndef M_PI
 #include <math.h>
 #endif
+inline void setfperrors()
+{
+  // FE_INEXACT happens in stoa()
+  feenableexcept(FE_DIVBYZERO | FE_UNDERFLOW | FE_OVERFLOW | FE_INVALID);
+}
 namespace fs
 {
 // fixed-size float types aren't defined until C++23
@@ -76,7 +83,7 @@ static constexpr size_t LookupMax{1'000};
 template <size_t RoundByDigits, size_t MaxValueAtLeast>
 class PreciseValue
 {
-  static inline MathSize round_value(const MathSize value) noexcept
+  static inline MathSize round_value(const MathSize value)
   {
     static constexpr int64_t RoundBy{pow_int<RoundByDigits>(static_cast<int64_t>(10))};
     static_assert(0 == RoundBy % 10);
@@ -116,7 +123,8 @@ class PreciseValue
         MaxValue,
         MinValue
       );
-      exit(-1);
+      throw std::runtime_error("Invalid rounding");
+      // exit(-1);
     }
 #endif
 #if defined(DEBUG_ROUNDING)
@@ -172,7 +180,8 @@ class PreciseValue
         MaxIntValue,
         MinIntValue
       );
-      exit(-1);
+      throw std::runtime_error("Invalid rounding");
+      // exit(-1);
     }
 #endif
     const auto v = static_cast<MathSize>(i) / static_cast<MathSize>(RoundBy);
