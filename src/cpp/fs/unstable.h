@@ -201,5 +201,6 @@ using LookupValue = PreciseValue<LookupDigits, LookupMax>;
 // in debug vs release version
 MathSize cos(const MathSize angle) noexcept;
 MathSize sin(const MathSize angle) noexcept;
+MathSize acos(const MathSize angle) noexcept;
 }
 #endif

@@ -4,4 +4,13 @@ namespace fs
 {
 MathSize cos(const MathSize angle) noexcept { return static_cast<MathSize>(std::cos(angle)); }
 MathSize sin(const MathSize angle) noexcept { return static_cast<MathSize>(std::sin(angle)); }
+MathSize acos(const MathSize angle) noexcept
+{
+  // FIX: change to use RAII
+  const auto excepts = fegetexcept();
+  fedisableexcept(FE_INVALID);
+  const auto v = std::acos(angle);
+  fesetexcept(excepts);
+  return v;
+}
 }
