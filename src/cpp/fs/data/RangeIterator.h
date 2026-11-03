@@ -2,9 +2,11 @@
 #ifndef FS_RANGE_ITERATOR_H
 #define FS_RANGE_ITERATOR_H
 #include "../stdafx.h"
-#include "../log/Log.h"
 // HACK: don't use until logging causing issues with constexpr is fixed
 #undef DEBUG_ITERATOR
+#ifdef DEBUG_ITERATOR
+#include "../log/Log.h"
+#endif
 namespace fs
 {
 template <class T = MathSize>
@@ -217,34 +219,6 @@ inline auto range_int(const int start, const int end, const int step, const bool
   std::ignore = inclusive;
   auto r = RangeIterator<int>(start, end, step);
   return vector<int>{r.begin(), r.end()};
-}
-}
-namespace fs::testing
-{
-template <class T>
-auto check_range(
-  const char* name_fct,
-  const char* name_param,
-  const auto fct_a,
-  const auto fct_b,
-  const MathSize epsilon,
-  const T& it
-)
-{
-  logging::debug("Checking {:s}", name_fct);
-  std::for_each(
-#if !defined(__APPLE__) || !defined(__clang__)
-    // apple clang doesn't support this?
-    std::execution::par_unseq,
-#endif
-    it.begin(),
-    it.end(),
-    [&](const auto& v) {
-      const auto msg = std::format("{} ({} = {})", name_fct, name_param, v);
-      logging::check_tolerance(epsilon, fct_a(v), fct_b(v), msg.c_str());
-      logging::verbose("{:s}", msg);
-    }
-  );
 }
 }
 #endif

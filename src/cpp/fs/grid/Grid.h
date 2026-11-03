@@ -3,10 +3,12 @@
 #define FS_GRID_H
 #include "../stdafx.h"
 #include "../geo/Point.h"
-#include "../log/Log.h"
 #include "../sim/Settings.h"
 #include "../types/Location.h"
 #include "tiff.h"
+#ifdef DEBUG_GRIDS
+#include "../log/Log.h"
+#endif
 namespace fs
 {
 using namespace logging;
