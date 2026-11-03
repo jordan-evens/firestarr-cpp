@@ -1,9 +1,9 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_FUEL_TYPE_OLD_H
 #define FS_FUEL_TYPE_OLD_H
-#include "../fs/Duff.h"
-#include "../fs/FuelType.h"
 #include "../fs/stdafx.h"
+#include "../fs/fuel/Duff.h"
+#include "../fs/fuel/FuelType.h"
 #include "../fs/Survival.h"
 namespace fs::fuelold
 {

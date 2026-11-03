@@ -1,11 +1,11 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
-#include "FBP.h"
-#include "FireSpread.h"
-#include "FWI.h"
-#include "unstable.h"
+#include "../stdafx.h"
+#include "FireBehaviourPrediction.h"
+#include "../FireSpread.h"
+#include "../unstable.h"
+#include "../wx/FireWeatherIndices.h"
 #ifdef DEBUG_FUEL_VARIABLE
-#include "Log.h"
+#include "../Log.h"
 #endif
 namespace fs::fuel
 {
@@ -63,11 +63,11 @@ MathSize FuelD1::isfD1(
 }
 MathSize FuelC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return calculate_surface_fuel_consumption_c1(spread.weather->ffmc.value);
+  return calculate_surface_fuel_consumption_c1(spread.weather.ffmc().value);
 }
 MathSize FuelC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather->bui.value);
+  return calculate_surface_fuel_consumption_mixed_or_c2(spread.weather.bui().value);
 }
 MathSize FuelC6::finalRos(
   const SpreadInfo& spread,
@@ -82,17 +82,17 @@ MathSize FuelC6::finalRos(
 }
 MathSize FuelC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return calculate_surface_fuel_consumption_c7_ffmc(spread.weather->ffmc.value)
-       + calculate_surface_fuel_consumption_c7_bui(spread.weather->bui.value);
+  return calculate_surface_fuel_consumption_c7_ffmc(spread.weather.ffmc().value)
+       + calculate_surface_fuel_consumption_c7_bui(spread.weather.bui().value);
 }
 MathSize FuelD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
-  return calculate_surface_fuel_consumption_d2(spread.weather->bui.value);
+  return calculate_surface_fuel_consumption_d2(spread.weather.bui().value);
 }
 MathSize FuelD2::calculateRos(const int, const FwiWeather& wx, const RoundedValue& isi)
   const noexcept
 {
-  return (wx.bui.value >= 80) ? rosBasic(isi) : 0.0;
+  return (wx.bui().value >= 80) ? rosBasic(isi) : 0.0;
 }
 // FIX: ensure actual code use in compilation doesn't matter and don't need to be speicified
 // manually in sequence
