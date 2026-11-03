@@ -3,6 +3,7 @@
 #define FS_UNSTABLE_H
 #define DEBUG_ROUNDING 1
 // #undef DEBUG_ROUNDING
+#include <atomic>
 #include <cinttypes>
 #include <cstdint>
 #include <cstdio>
@@ -70,7 +71,7 @@ class PreciseValue
     static_assert(10 <= RoundBy);
     static_assert(std::numeric_limits<int64_t>::max() > RoundBy);
     // stay a few decimals from max
-    static constexpr size_t BufferDigits = 2;
+    static constexpr size_t BufferDigits = 1;
     static_assert(std::numeric_limits<int64_t>::digits10 > (RoundByDigits + BufferDigits));
     // static constexpr size_t Buffer = pow_int<BufferDigits>(10);
     static constexpr int64_t MaxFloatValue =
@@ -107,27 +108,44 @@ class PreciseValue
       );
       exit(-1);
     }
-    static MathSize min_recorded{std::numeric_limits<MathSize>::max()};
-    static MathSize max_recorded{std::numeric_limits<MathSize>::min()};
-    if (value < min_recorded)
+    if constexpr (RoundByDigits > 3)
     {
-      printf(
-        "Minimum recorded value is now %0.100g of possible %" PRId64 " from %0.100g\n",
-        value,
-        MinValue,
-        min_recorded
-      );
-      min_recorded = value;
-    }
-    if (max_recorded < value)
-    {
-      printf(
-        "Maximum recorded value is now %0.100g of possible %" PRId64 " from %0.100g\n",
-        value,
-        MaxValue,
-        max_recorded
-      );
-      max_recorded = value;
+      static std::atomic<MathSize> min_recorded{std::numeric_limits<MathSize>::max()};
+      static std::atomic<MathSize> max_recorded{std::numeric_limits<MathSize>::min()};
+      static std::atomic<MathSize> min_magnitude{std::numeric_limits<MathSize>::max()};
+      static std::atomic<MathSize> max_magnitude{std::numeric_limits<MathSize>::min()};
+      if (value < min_recorded)
+      {
+        // if (min_magnitude > value * 10)
+        if (value < -1)
+        {
+          printf(
+            "Minimum recorded value is now %0.100g of possible %" PRId64 " from %0.100g\n",
+            value,
+            MinValue,
+            +min_magnitude
+          );
+          min_magnitude = value;
+        }
+        min_recorded = value;
+      }
+      if (max_recorded < value)
+      {
+        // if (max_magnitude * 10 < value)
+        // 16k -> rso = FuelType::criticalRos(spread.sfc_, critical_surface_intensity);
+        // 388k -> spread.is_crown_ = FuelType::isCrown(critical_surface_intensity, sfi);
+        if (value > 1000)
+        {
+          printf(
+            "Maximum recorded value is now %0.100g of possible %" PRId64 " from %0.100g\n",
+            value,
+            MaxValue,
+            +max_magnitude
+          );
+          max_magnitude = value;
+        }
+        max_recorded = value;
+      }
     }
 #endif
     const auto i = static_cast<int64_t>(value * static_cast<MathSize>(RoundBy));
@@ -156,9 +174,10 @@ public:
   PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
   constexpr operator double() const noexcept { return value; }
 };
-// HACK: float values seem to deviate at 18 digits, but round so we can have MaxFloatValue not
-// overflow
-using RoundedValue = PreciseValue<8>;
+// HACK: float values seem to deviate at 18 digits, but round to have MaxFloatValue not overflow
+using RoundedValue = PreciseValue<14>;
+// Can go 300k+ for S3. Don't want to use int but don't need high precision
+using RoundedIntensity = PreciseValue<8>;
 // HACK: use for replicating old LookupTable rounding
 using LookupValue = PreciseValue<1>;
 // HACK: override these so unstable code doesn't change results of functions

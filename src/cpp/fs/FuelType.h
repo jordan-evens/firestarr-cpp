@@ -73,7 +73,7 @@ public:
    */
   [[nodiscard]] static constexpr MathSize criticalRos(
     const RoundedValue& sfc,
-    const RoundedValue& csi
+    const RoundedIntensity& csi
   )
   {
     return sfc > 0 ? csi / (300.0 * sfc) : 0.0;
@@ -84,7 +84,10 @@ public:
    * \param sfi Surface Fire Intensity (kW/m)
    * \return Whether or not this is a crown fire
    */
-  [[nodiscard]] static constexpr bool isCrown(const RoundedValue& csi, const RoundedValue& sfi)
+  [[nodiscard]] static constexpr bool isCrown(
+    const RoundedIntensity& csi,
+    const RoundedIntensity& sfi
+  )
   {
     return sfi > csi;
   }
