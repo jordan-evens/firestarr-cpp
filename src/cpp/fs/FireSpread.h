@@ -2,11 +2,11 @@
 #ifndef FS_FIRE_SPREAD_H
 #define FS_FIRE_SPREAD_H
 #include "stdafx.h"
+#include "geo/Point.h"
 #include "types/Location.h"
 #include "wx/FwiWeather.h"
 #include "wx/WeatherIndices.h"
 #include "Cell.h"
-#include "Point.h"
 namespace fs
 {
 namespace fuel

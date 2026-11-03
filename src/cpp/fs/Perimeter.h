@@ -2,8 +2,8 @@
 #ifndef FS_PERIMETER_H
 #define FS_PERIMETER_H
 #include "stdafx.h"
+#include "geo/Point.h"
 #include "GridMap.h"
-#include "Point.h"
 namespace fs
 {
 class Environment;
