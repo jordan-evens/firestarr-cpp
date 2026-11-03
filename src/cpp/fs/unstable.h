@@ -185,7 +185,14 @@ class PreciseValue
 
 public:
   MathSize value{};
+  ~PreciseValue() noexcept = default;
   constexpr PreciseValue() = default;
+  constexpr PreciseValue(const PreciseValue<RoundByDigits, MaxValueAtLeast>& rhs
+  ) noexcept = default;
+  constexpr PreciseValue(PreciseValue<RoundByDigits, MaxValueAtLeast>&& rhs) noexcept = default;
+  PreciseValue& operator=(const PreciseValue<RoundByDigits, MaxValueAtLeast>& rhs
+  ) noexcept = default;
+  PreciseValue& operator=(PreciseValue<RoundByDigits, MaxValueAtLeast>&& rhs) noexcept = default;
   PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
   constexpr operator double() const noexcept { return value; }
 };
