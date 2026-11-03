@@ -16,20 +16,20 @@ static constexpr MathSize SLOPE_LIMIT_ISI = 0.01;
  * \param fmc Foliar Moisture Content (FMC)
  * \return Standard foliar moisture effect (FME) based on FMC [ST-X-3 eq 61]
  */
-[[nodiscard]] MathSize calculate_standard_foliar_moisture_fmc(const MathSize f) noexcept;
+[[nodiscard]] MathSize calculate_standard_foliar_moisture_fmc(const RoundedValue& fmc) noexcept;
 /**
  * \brief Crown fire spread rate (m/min) / Foliar Moisture Effect (RSC / (FME / FME_avg)) [ST-X-3 eq
  * 64]
  * \param isi Initial Spread Index
  * \return RSC / (FME / FME_avg) [ST-X-3 eq 64]
  */
-[[nodiscard]] MathSize calculate_standard_foliar_moisture_isi(const MathSize i) noexcept;
+[[nodiscard]] MathSize calculate_standard_foliar_moisture_isi(const RoundedValue& isi) noexcept;
 /**
  * \brief Length to Breadth ratio [ST-X-3 eq 79]
  * \param ws Wind Speed (km/h)
  * \return Length to Breadth ratio [ST-X-3 eq 79]
  */
-[[nodiscard]] MathSize calculate_standard_length_to_breadth(const MathSize w) noexcept;
+[[nodiscard]] MathSize calculate_standard_length_to_breadth(const RoundedValue& ws) noexcept;
 /**
  * \brief A FuelBase made of a standard fuel type.
  * \tparam A Rate of spread parameter a [ST-X-3 table 6]
