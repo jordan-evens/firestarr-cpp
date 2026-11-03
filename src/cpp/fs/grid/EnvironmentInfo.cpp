@@ -2,7 +2,7 @@
 #include "EnvironmentInfo.h"
 #include "../geo/Point.h"
 #include "../Log.h"
-#include "../Settings.h"
+#include "../sim/Settings.h"
 #include "Environment.h"
 #include "Grid.h"
 namespace fs

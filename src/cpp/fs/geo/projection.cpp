@@ -2,7 +2,7 @@
 #include "projection.h"
 #include <proj.h>
 #include "../Log.h"
-#include "../Settings.h"
+#include "../sim/Settings.h"
 #include "../types/Radians.h"
 #include "../unstable.h"
 #include "../Util.h"

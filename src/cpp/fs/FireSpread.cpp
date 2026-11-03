@@ -2,7 +2,7 @@
 #include "FireSpread.h"
 #include "fuel/FuelLookup.h"
 #include "fuel/FuelType.h"
-#include "Settings.h"
+#include "sim/Settings.h"
 #include "SpreadAlgorithm.h"
 #include "TimeUtil.h"
 #include "unstable.h"
