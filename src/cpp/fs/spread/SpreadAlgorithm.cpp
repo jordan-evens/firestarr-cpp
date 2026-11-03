@@ -2,6 +2,7 @@
 #include "../stdafx.h"
 #include "SpreadAlgorithm.h"
 #include "../fuel/FuelType.h"
+#include "../log/Log.h"
 #include "../util/Util.h"
 #include "FireSpread.h"
 namespace fs

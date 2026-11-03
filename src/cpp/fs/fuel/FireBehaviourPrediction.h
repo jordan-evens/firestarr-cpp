@@ -8,9 +8,6 @@
 #include "Greenup.h"
 #include "StandardFuel.h"
 #include "Survival.h"
-#ifdef DEBUG_FUEL_VARIABLE
-#include "../log/Log.h"
-#endif
 namespace fs::fuel
 {
 using fs::fuel::calculate_grass_curing;

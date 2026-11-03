@@ -2,6 +2,7 @@
 #ifndef FS_FUEL_LOOKUP_H
 #define FS_FUEL_LOOKUP_H
 #include "../stdafx.h"
+#include "../log/Log.h"
 #include "FuelType.h"
 namespace fs::fuel
 {
