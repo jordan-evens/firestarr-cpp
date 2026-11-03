@@ -9,6 +9,7 @@
 #include "fs/log/Log.h"
 #include "fs/sim/ArgumentParser.h"
 #include "fs/spread/FireSpread.h"
+#include "test/test.h"
 #include "test_fbp/FBPOld.h"
 #include "test_fbp/FuelOldLookup.h"
 namespace fs::testing
@@ -367,31 +368,6 @@ auto compare_spread(
       }
       logging::verbose("compare_spread() == 0 with {:d} comparisons", count_comparisons);
       return 0;
-    }
-  );
-}
-template <class T>
-auto check_range(
-  const char* name_fct,
-  const char* name_param,
-  const auto fct_a,
-  const auto fct_b,
-  const MathSize epsilon,
-  const T& it
-)
-{
-  logging::debug("Checking {:s}", name_fct);
-  std::for_each(
-#if !defined(__APPLE__) || !defined(__clang__)
-    // apple clang doesn't support this?
-    std::execution::par_unseq,
-#endif
-    it.begin(),
-    it.end(),
-    [&](const auto& v) {
-      const auto msg = std::format("{} ({} = {})", name_fct, name_param, v);
-      logging::check_tolerance(epsilon, fct_a(v), fct_b(v), msg.c_str());
-      logging::verbose("{:s}", msg);
     }
   );
 }

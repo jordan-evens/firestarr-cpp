@@ -134,6 +134,16 @@ foreach(bin ${PROJECT_NAME} test_duff test_fwi test_fbp test_rng)
   message("Adding binary for ${bin}")
   set(DIR_SRC_TEST ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/${bin})
   file(GLOB FILES_TEST_CPP ${DIR_SRC_TEST}/*.cpp)
+  # HACK: put actual tests in test folder but use same loop for main binary
+  if(${bin} MATCHES "^test_*")
+      # include test folder for common code
+      set(
+        DIR_SRC_TEST_COMMON
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/test
+      )
+    file(GLOB FILES_TEST_COMMON_CPP ${DIR_SRC_TEST_COMMON}/*.cpp)
+    set(FILES_TEST_CPP ${FILES_TEST_CPP} ${FILES_TEST_COMMON_CPP})
+  endif()
   # include file with main() for each bin
   add_executable(${bin} ${DIR_SRC}/${bin}.cpp ${FILE_VERSION_CPP} ${FILES_TEST_CPP})
 
