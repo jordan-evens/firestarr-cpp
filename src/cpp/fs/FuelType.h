@@ -162,14 +162,16 @@ public:
    * \param isi Initial Spread Index (may differ from wx because of slope)
    * \return Rate of spread (m/min)
    */
-  [[nodiscard]] virtual MathSize calculateRos(int nd, const FwiWeather& wx, MathSize isi) const = 0;
+  [[nodiscard]] virtual MathSize calculateRos(int nd, const FwiWeather& wx, const RoundedValue& isi)
+    const = 0;
   /**
    * \brief Calculate ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41/42]
    * \param spread SpreadInfo to use
    * \param isi Initial Spread Index
    * \return ISI with slope influence and zero wind (ISF) [ST-X-3 eq 41/42]
    */
-  [[nodiscard]] virtual MathSize calculateIsf(const SpreadInfo& spread, MathSize isi) const = 0;
+  [[nodiscard]] virtual MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
+    const = 0;
   /**
    * \brief Surface fuel consumption (SFC) (kg/m^2) [ST-X-3 eq 9-25]
    * \param spread SpreadInfo to use
@@ -192,7 +194,7 @@ public:
    */
   [[nodiscard]] virtual MathSize finalRos(
     const SpreadInfo& spread,
-    MathSize isi,
+    const RoundedValue& isi,
     MathSize cfb,
     MathSize rss
   ) const = 0;
@@ -283,12 +285,12 @@ public:
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize calculateRos(int, const FwiWeather&, MathSize) const override;
+  [[nodiscard]] MathSize calculateRos(int, const FwiWeather&, const RoundedValue&) const override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize calculateIsf(const SpreadInfo&, MathSize) const override;
+  [[nodiscard]] MathSize calculateIsf(const SpreadInfo&, const RoundedValue&) const override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
@@ -303,7 +305,8 @@ public:
    * \brief Throw a runtime_error
    * \return Throw a runtime_error
    */
-  [[nodiscard]] MathSize finalRos(const SpreadInfo&, MathSize, MathSize, MathSize) const override;
+  [[nodiscard]] MathSize finalRos(const SpreadInfo&, const RoundedValue&, MathSize, MathSize)
+    const override;
   /**
    * \brief Throw a runtime_error
    * \return Throw a runtime_error

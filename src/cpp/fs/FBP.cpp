@@ -34,8 +34,11 @@ MathSize calculate_base_multiplier_curing(const RoundedValue& curing) noexcept
 {
   return (curing >= 58.8) ? (0.176 + 0.02 * (curing - 58.8)) : (0.005 * expm1(0.061 * curing));
 }
-MathSize FuelD1::isfD1(const SpreadInfo& spread, const MathSize ros_multiplier, const MathSize isi)
-  const noexcept
+MathSize FuelD1::isfD1(
+  const SpreadInfo& spread,
+  const MathSize ros_multiplier,
+  const RoundedValue& isi
+) const noexcept
 {
   return limitIsf(
     ros_multiplier,
@@ -61,7 +64,7 @@ MathSize FuelC2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 }
 MathSize FuelC6::finalRos(
   const SpreadInfo& spread,
-  const MathSize isi,
+  const RoundedValue& isi,
   const MathSize cfb,
   const MathSize rss
 ) const noexcept
@@ -100,7 +103,8 @@ MathSize FuelD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_d2(spread.weather->bui.value);
 }
-MathSize FuelD2::calculateRos(const int, const FwiWeather& wx, const MathSize isi) const noexcept
+MathSize FuelD2::calculateRos(const int, const FwiWeather& wx, const RoundedValue& isi)
+  const noexcept
 {
   return (wx.bui.value >= 80) ? rosBasic(isi) : 0.0;
 }

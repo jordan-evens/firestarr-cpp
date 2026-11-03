@@ -451,7 +451,7 @@ auto compare_fuel_basic(
     EPSILON,
     RANGE_CFB
   );
-  // MathSize calculateRos(int nd, const FwiWeather& wx, MathSize isi) const
+  // MathSize calculateRos(int nd, const FwiWeather& wx, const RoundedValue& isi) const
   // need to check breakpoints
   // - BUI 80 (D2)
   // - DC 500 (O1)
@@ -500,7 +500,7 @@ auto compare_fuel_basic(
       );
     }
   );
-  // MathSize calculateIsf(const SpreadInfo& spread, MathSize isi)
+  // MathSize calculateIsf(const SpreadInfo& spread, const RoundedValue& isi)
   // MathSize surfaceFuelConsumption(const SpreadInfo& spread) const
   check_range(
     "lengthToBreadth()",
@@ -510,8 +510,8 @@ auto compare_fuel_basic(
     EPSILON,
     RANGE_WIND_SPEED
   );
-  // MathSize finalRos(const SpreadInfo& spread, MathSize isi, MathSize cfb, MathSize rss) const
-  // MathSize criticalSurfaceIntensity(const SpreadInfo& spread) const
+  // MathSize finalRos(const SpreadInfo& spread, const RoundedValue& isi, MathSize cfb, MathSize
+  // rss) const MathSize criticalSurfaceIntensity(const SpreadInfo& spread) const
   // check_equal(a.name(), b.name(), "name");
   // check_equal(a.code(), b.code(), "code");
   // return 0;
@@ -563,7 +563,7 @@ auto compare_fuel(
   check_equal(a.a(), b.a(), "a");
   check_equal(a.negB(), b.negB(), "negB");
   check_equal(a.c(), b.c(), "c");
-  // static constexpr MathSize crownRateOfSpread(const MathSize isi, const MathSize fmc)
+  // static constexpr MathSize crownRateOfSpread(const RoundedValue& isi, const MathSize fmc)
   // noexcept
   check_equal(a.logQ(), b.logQ(), "logQ");
   return 0;

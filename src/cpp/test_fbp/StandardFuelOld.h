@@ -106,7 +106,7 @@ public:
    * \param isi Initial Spread Index
    * \return Initial rate of spread (m/min) [ST-X-3 eq 26]
    */
-  [[nodiscard]] MathSize rosBasic(const MathSize isi) const noexcept
+  [[nodiscard]] MathSize rosBasic(const RoundedValue& isi) const noexcept
   {
     return a() * pow(1.0 - exp(negB() * isi), c());
   }
@@ -152,7 +152,7 @@ public:
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
    * \return Final rate of spread (m/min)
    */
-  MathSize finalRos(const SpreadInfo&, MathSize, MathSize, const MathSize rss)
+  MathSize finalRos(const SpreadInfo&, const RoundedValue&, MathSize, const MathSize rss)
     const noexcept override
   {
     return rss;
@@ -214,7 +214,7 @@ public:
    * \return Crown fire spread rate (RSC) (m/min) [ST-X-3 eq 64]
    */
   [[nodiscard]] static constexpr MathSize crownRateOfSpread(
-    const MathSize isi,
+    const RoundedValue& isi,
     const MathSize fmc
   ) noexcept
   {
