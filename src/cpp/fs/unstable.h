@@ -67,10 +67,10 @@ template <size_t N, class T>
 }
 // HACK: force rounding so that precision matches across platforms
 // HACK: float values seem to deviate at 18 digits, but round to have MaxFloatValue not overflow
-static constexpr size_t RoundedDigits{14};
+static constexpr size_t RoundedDigits{12};
 static constexpr size_t RoundedMax{1'000};
 // Can go 300k+ for S3. Don't want to use int but don't need high precision
-static constexpr size_t IntensityDigits{12};
+static constexpr size_t IntensityDigits{10};
 static constexpr size_t IntensityMax{999'999};
 // HACK: use for replicating old LookupTable rounding
 static constexpr size_t LookupDigits{1};
