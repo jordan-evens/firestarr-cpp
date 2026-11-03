@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
+#include <cinttypes>
 #include <cstdint>
 #include <cstdio>
 #include <limits>
@@ -96,7 +97,7 @@ class PreciseValue
     if (MaxFloatValue < value || value < -MaxFloatValue)
     {
       printf(
-        "Rounding value %0.100g results in it going out of bounds (%ld, %ld)\n",
+        "Rounding value %0.100g results in it going out of bounds (%" PRId64 ", %" PRId64 ")\n",
         value,
         MaxValue,
         MinValue
@@ -108,7 +109,7 @@ class PreciseValue
     if (value < min_recorded)
     {
       printf(
-        "Minimum recorded value is now %0.100g of possible %ld from %0.100g\n",
+        "Minimum recorded value is now %0.100g of possible %" PRId64 " from %0.100g\n",
         value,
         MinValue,
         min_recorded
@@ -118,7 +119,7 @@ class PreciseValue
     if (max_recorded < value)
     {
       printf(
-        "Maximum recorded value is now %0.100g of possible %ld from %0.100g\n",
+        "Maximum recorded value is now %0.100g of possible %" PRId64 " from %0.100g\n",
         value,
         MaxValue,
         max_recorded
@@ -130,7 +131,8 @@ class PreciseValue
     if (MaxIntValue < i || i < MinIntValue)
     {
       printf(
-        "Rounding value %0.100g -> %ld results in it going out of bounds (%ld, %ld)\n",
+        "Rounding value %0.100g -> %" PRId64 " results in it going out of bounds (%" PRId64
+        ", %" PRId64 ")\n",
         value,
         i,
         MaxIntValue,
