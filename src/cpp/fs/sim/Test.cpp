@@ -6,7 +6,7 @@
 #include "../fuel/FuelLookup.h"
 #include "../Log.h"
 #include "../types/Location.h"
-#include "../Util.h"
+#include "../util/Util.h"
 #include "../wx/FireWeather.h"
 #include "Model.h"
 #include "Observer.h"

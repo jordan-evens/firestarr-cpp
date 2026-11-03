@@ -2,9 +2,9 @@
 #include "Settings.h"
 #include "../fuel/FuelLookup.h"
 #include "../Log.h"
-#include "../TimeUtil.h"
-#include "../Trim.h"
-#include "../Util.h"
+#include "../util/TimeUtil.h"
+#include "../util/Trim.h"
+#include "../util/Util.h"
 namespace fs::settings
 {
 static mutex MUTEX{};

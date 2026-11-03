@@ -2,7 +2,7 @@
 #ifndef FS_LOG_VALUE_H
 #define FS_LOG_VALUE_H
 #include <compare>
-#include "unstable.h"
+#include "../unstable.h"
 namespace fs
 {
 /**

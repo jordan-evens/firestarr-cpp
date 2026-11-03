@@ -3,7 +3,7 @@
 #define FS_CONSTANT_GRID_H
 #include "../stdafx.h"
 #include "../types/Location.h"
-#include "../Util.h"
+#include "../util/Util.h"
 #include "Grid.h"
 namespace fs
 {

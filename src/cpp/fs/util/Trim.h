@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_TRIM_H
 #define FS_TRIM_H
-#include "stdafx.h"
+#include "../stdafx.h"
 namespace fs
 {
 // remove leading and trailing spaces

@@ -2,8 +2,8 @@
 #include "stdafx.h"
 #include "SpreadAlgorithm.h"
 #include "fuel/FuelType.h"
+#include "util/Util.h"
 #include "FireSpread.h"
-#include "Util.h"
 namespace fs
 {
 using fs::fuel::fire_intensity;
