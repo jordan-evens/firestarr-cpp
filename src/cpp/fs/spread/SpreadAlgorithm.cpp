@@ -4,6 +4,9 @@
 #include "../fuel/FuelType.h"
 #include "../util/Util.h"
 #include "FireSpread.h"
+#ifdef DEBUG_POINTS
+#include "../log/Log.h"
+#endif
 namespace fs
 {
 using fs::fuel::fire_intensity;
@@ -299,7 +302,9 @@ HorizontalAdjustment horizontal_adjustment(const AspectSize slope_azimuth, const
 #ifdef DEBUG_POINTS
   if (head_ros >= min_ros_)
   {
-    logging::check_fatal(offsets.empty(), "Empty when ros of {:f} >= {:f}", head_ros, min_ros_);
+    logging::check_fatal(
+      offsets.empty(), "Empty when ros of {:f} >= {:f}", head_ros.value, min_ros_
+    );
   }
 #endif
   return offsets;
