@@ -39,6 +39,7 @@ static_assert(4 == sizeof(_Float32), "Could not determine 32-bit float type");
 static_assert(8 == sizeof(_Float64), "Could not determine 64-bit float type");
 // Type used for math operations
 using MathSize = _Float64;
+using MathConstantSize = _Float64;
 /**
  * \brief Return base raised to the power N
  * \tparam N Power to raise to
@@ -72,8 +73,6 @@ public:
   constexpr PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
   constexpr operator double() const noexcept { return value; }
 };
-// HACK: less than maximum enough to not overflow
-using MathConstantSize = PreciseValue<9>;
 using RoundedValue = PreciseValue<8>;
 // HACK: use for replicating old LookupTable rounding
 using LookupValue = PreciseValue<1>;
