@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #include "../stdafx.h"
 #include "FireBehaviourPrediction.h"
-#include "../FireSpread.h"
+#include "../spread/FireSpread.h"
 #include "../unstable.h"
 #include "../wx/FireWeatherIndices.h"
 #ifdef DEBUG_FUEL_VARIABLE

@@ -1,15 +1,15 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_CELL_POINTS_H
 #define FS_CELL_POINTS_H
-#include "stdafx.h"
+#include "../stdafx.h"
 #include <algorithm>
 #include <compare>
-#include "grid/BurnedData.h"
-#include "grid/Cell.h"
-#include "types/Location.h"
-#include "wx/WeatherIndices.h"
+#include "../grid/BurnedData.h"
+#include "../grid/Cell.h"
+#include "../types/Location.h"
+#include "../unstable.h"
+#include "../wx/WeatherIndices.h"
 #include "FireSpread.h"
-#include "unstable.h"
 namespace fs
 {
 using fs::Direction;
