@@ -3,7 +3,7 @@
 #include "fuel/Greenup.h"
 #include "types/Location.h"
 #include "wx/FireWeather.h"
-#include "Input.h"
+#include "wx/Input.h"
 #include "Log.h"
 #include "Observer.h"
 #include "Perimeter.h"
