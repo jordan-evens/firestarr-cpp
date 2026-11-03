@@ -3,29 +3,45 @@
 #include "unstable.h"
 namespace fs::fuelold
 {
-MathSize calculate_surface_fuel_consumption_mixed_or_c2(const RoundedValue& bui) noexcept
+MathSize calculate_surface_fuel_consumption_jackpine(const LookupValue& bui) noexcept
 {
-  return 5.0 * (1.0 - exp(-0.0115 * bui));
+  return 5.0 * pow(1.0 - exp(-0.0164 * bui), 2.24);
 }
-MathSize calculate_surface_fuel_consumption_d1(const RoundedValue& bui) noexcept
-{
-  return 1.5 * (1.0 - exp(-0.0183 * bui));
-}
-MathSize calculate_base_multiplier_curing(const RoundedValue& curing) noexcept
-{
-  return (curing >= 58.8) ? (0.176 + 0.02 * (curing - 58.8)) : (0.005 * expm1(0.061 * curing));
-}
-MathSize calculate_length_to_breadth_grass(const RoundedValue& ws) noexcept
-{
-  return ws < 1.0 ? 1.0 : (1.1 * pow(ws, 0.464));
-}
-MathSize calculate_surface_fuel_consumption_pine(const RoundedValue& bui) noexcept
+MathSize calculate_surface_fuel_consumption_pine(const LookupValue& bui) noexcept
 {
   return 5.0 * pow(1.0 - exp(-0.0149 * bui), 2.48);
 }
-MathSize calculate_surface_fuel_consumption_jackpine(const RoundedValue& bui) noexcept
+MathSize calculate_surface_fuel_consumption_c1(const LookupValue& ffmc) noexcept
 {
-  return 5.0 * pow(1.0 - exp(-0.0164 * bui), 2.24);
+  return max(0.0, 0.75 + ((ffmc > 84) ? 0.75 : -0.75) * sqrt(1 - exp(-0.23 * abs(ffmc - 84))));
+}
+MathSize calculate_surface_fuel_consumption_mixed_or_c2(const LookupValue& bui) noexcept
+{
+  return 5.0 * (1.0 - exp(-0.0115 * bui));
+}
+MathSize calculate_surface_fuel_consumption_c7_ffmc(const LookupValue& ffmc) noexcept
+{
+  return (ffmc > 70) ? 2.0 * (1.0 - exp(-0.104 * (ffmc - 70.0))) : 0.0;
+}
+MathSize calculate_surface_fuel_consumption_c7_bui(const LookupValue& bui) noexcept
+{
+  return 1.5 * (1.0 - exp(-0.0201 * bui));
+}
+MathSize calculate_surface_fuel_consumption_d1(const LookupValue& bui) noexcept
+{
+  return 1.5 * (1.0 - exp(-0.0183 * bui));
+}
+MathSize calculate_surface_fuel_consumption_d2(const LookupValue& bui) noexcept
+{
+  return bui >= 80 ? 1.5 * (1.0 - exp(-0.0183 * bui)) : 0.0;
+}
+MathSize calculate_base_multiplier_curing(const LookupValue& curing) noexcept
+{
+  return (curing >= 58.8) ? (0.176 + 0.02 * (curing - 58.8)) : (0.005 * expm1(0.061 * curing));
+}
+MathSize calculate_length_to_breadth_grass(const LookupValue& ws) noexcept
+{
+  return ws < 1.0 ? 1.0 : (1.1 * pow(ws, 0.464));
 }
 MathSize FuelOldD1::isfD1(
   const SpreadInfo& spread,
@@ -37,15 +53,6 @@ MathSize FuelOldD1::isfD1(
     ros_multiplier,
     spread.slopeFactor() * (ros_multiplier * a()) * pow(1.0 - exp(negB() * isi), c())
   );
-}
-/**
- * \brief Surface Fuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
- * \param ffmc Fine Fuel Moisture Code
- * \return Surface Fuel Consumption (SFC) (kg/m^2) [GLC-X-10 eq 9a/9b]
- */
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_c1(const RoundedValue& ffmc) noexcept
-{
-  return max(0.0, 0.75 + ((ffmc > 84) ? 0.75 : -0.75) * sqrt(1 - exp(-0.23 * abs(ffmc - 84))));
 }
 MathSize FuelOldC1::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
@@ -66,31 +73,10 @@ MathSize FuelOldC6::finalRos(
   // using max with 0 is the same as ensuring rsc > rss
   return rss + cfb * max(0.0, rsc - rss);
 }
-/**
- * \brief Forest Floor Consumption (FFC) (kg/m^2) [ST-X-3 eq 13]
- * \param ffmc Fine Fuel Moisture Code
- * \return Forest Floor Consumption (FFC) (kg/m^2) [ST-X-3 eq 13]
- */
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_c7_ffmc(const RoundedValue& ffmc) noexcept
-{
-  return (ffmc > 70) ? 2.0 * (1.0 - exp(-0.104 * (ffmc - 70.0))) : 0.0;
-}
-/**
- * \brief Woody Fuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
- * \return Woody Fuel Consumption (WFC) (kg/m^2) [ST-X-3 eq 14]
- */
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_c7_bui(const RoundedValue& bui) noexcept
-{
-  return 1.5 * (1.0 - exp(-0.0201 * bui));
-}
 MathSize FuelOldC7::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {
   return calculate_surface_fuel_consumption_c7_ffmc(spread.weather->ffmc.value)
        + calculate_surface_fuel_consumption_c7_bui(spread.weather->bui.value);
-}
-[[nodiscard]] MathSize calculate_surface_fuel_consumption_d2(const RoundedValue& bui) noexcept
-{
-  return bui >= 80 ? 1.5 * (1.0 - exp(-0.0183 * bui)) : 0.0;
 }
 MathSize FuelOldD2::surfaceFuelConsumption(const SpreadInfo& spread) const noexcept
 {

@@ -98,21 +98,6 @@ template <class T>
   return static_cast<MathSize>(x) * static_cast<MathSize>(x);
 }
 /**
- * \brief Return base raised to the power N
- * \tparam N Power to raise to
- * \tparam T Type passed and returned
- * \param base Base to raise to power N
- * \return base raised to power N
- */
-template <unsigned int N, class T>
-[[nodiscard]] constexpr T pow_int(const T& base)
-{
-  // https://stackoverflow.com/questions/16443682/c-power-of-integer-template-meta-programming
-  return N == 0     ? 1
-       : N % 2 == 0 ? pow_int<N / 2, T>(base) * pow_int<N / 2, T>(base)
-                    : base * pow_int<(N - 1) / 2, T>(base) * pow_int<(N - 1) / 2, T>(base);
-}
-/**
  * \brief Makes a bit mask of all 1's the specified size
  * \tparam N Number of bits
  * \tparam T Type to return

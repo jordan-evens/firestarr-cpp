@@ -2,15 +2,15 @@
 #include "StandardFuel.h"
 namespace fs::fuel
 {
-MathSize calculate_standard_foliar_moisture_fmc(const RoundedValue& fmc) noexcept
+MathSize calculate_standard_foliar_moisture_fmc(const LookupValue& fmc) noexcept
 {
   return pow_int<4>(1.5 - 0.00275 * fmc) / (460.0 + 25.9 * fmc) / 0.778 * 1000.0;
 }
-MathSize calculate_standard_foliar_moisture_isi(const RoundedValue& isi) noexcept
+MathSize calculate_standard_foliar_moisture_isi(const LookupValue& isi) noexcept
 {
   return 60.0 * (1.0 - exp(-0.0497 * isi));
 }
-MathSize calculate_standard_length_to_breadth(const RoundedValue& ws) noexcept
+MathSize calculate_standard_length_to_breadth(const LookupValue& ws) noexcept
 {
   return 1.0 + 8.729 * pow(1.0 - exp(-0.030 * ws), 2.155);
 }
