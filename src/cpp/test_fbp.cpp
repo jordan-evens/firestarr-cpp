@@ -13,7 +13,8 @@
 #include "test_fbp/FuelOldLookup.h"
 namespace fs::testing
 {
-// FIX: this was used to compare to the old template version, but doesn't work now
+// FIX: this was used to compare t
+// o the old template version, but doesn't work now
 //      left for reference for now so idea could be used for more tests
 using fs::fuel::FuelType;
 using fs::fuel::ROSOffset;
