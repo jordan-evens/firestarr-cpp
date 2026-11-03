@@ -1,9 +1,13 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
+#define CHECK_ROUNDING 1
+// #undef CHECK_ROUNDING
 #define DEBUG_ROUNDING 1
-// #undef DEBUG_ROUNDING
+#undef DEBUG_ROUNDING
+#if defined(DEBUG_ROUNDING) || defined(CHECK_ROUNDING)
 #include <cinttypes>
+#endif
 #include <cstdint>
 #include <cstdio>
 #include <limits>
@@ -92,17 +96,9 @@ class PreciseValue
       static_cast<size_t>(std::numeric_limits<int64_t>::max())
       > (static_cast<size_t>(RoundBy) * static_cast<size_t>(MaxFloatValue))
     );
-    // HACK: at least 1k as maximum possible value
+    // at least same as maximum possible value
     static_assert(MaxFloatValue >= MaxValueAtLeast);
-    // static constexpr auto MaxValue = static_cast<MathSize>(
-    //   static_cast<int64 _t>(std::numeric_limits<int64_t>::max())
-    //   / static_cast<int64_t>(RoundBy * MaxFloatValue)
-    // );
-    // static constexpr auto MinValue = static_cast<MathSize>(
-    //   static_cast<int64_t>(std::numeric_limits<int64_t>::min())
-    //   / static_cast<int64_t>(RoundBy * MaxFloatValue)
-    // );
-#ifdef DEBUG_ROUNDING
+#if defined(DEBUG_ROUNDING) || defined(CHECK_ROUNDING)
     static constexpr auto MaxValue{MaxFloatValue};
     static constexpr auto MinValue{-MaxFloatValue};
     static constexpr auto MaxIntValue{
@@ -111,7 +107,7 @@ class PreciseValue
     static constexpr auto MinIntValue{
       static_cast<int64_t>(MinValue * static_cast<MathSize>(RoundBy))
     };
-    // HACK: ensure not out of bounds
+    // ensure not out of bounds
     if (MaxFloatValue < value || value < -MaxFloatValue)
     {
       printf(
@@ -122,6 +118,8 @@ class PreciseValue
       );
       exit(-1);
     }
+#endif
+#if defined(DEBUG_ROUNDING)
     if constexpr (RoundByDigits > IntensityDigits)
     {
       static MathSize min_recorded{std::numeric_limits<MathSize>::max()};
@@ -163,8 +161,8 @@ class PreciseValue
     }
 #endif
     const auto i = static_cast<int64_t>(value * static_cast<MathSize>(RoundBy));
-#ifdef DEBUG_ROUNDING
-    // HACK: ensure not out of bounds
+#if defined(DEBUG_ROUNDING) || defined(CHECK_ROUNDING)
+    // ensure not out of bounds
     if (MaxIntValue < i || i < MinIntValue)
     {
       printf(
