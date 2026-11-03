@@ -2,6 +2,7 @@
 #ifndef FS_UNSTABLE_H
 #define FS_UNSTABLE_H
 #include <cstdint>
+#include <cstdio>
 #include <limits>
 #define _USE_MATH_DEFINES
 #include <cfloat>
@@ -56,23 +57,99 @@ template <size_t N, class T>
                     : base * pow_int<(N - 1) / 2, T>(base) * pow_int<(N - 1) / 2, T>(base);
 }
 // HACK: force rounding so that precision matches across platforms
-template <size_t Precision>
+template <size_t RoundByDigits>
 class PreciseValue
 {
   static inline MathSize round_value(const MathSize value) noexcept
   {
-    static constexpr auto round_by = pow_int<Precision>(10);
-    const auto i = static_cast<size_t>(value * round_by);
-    const auto v = static_cast<MathSize>(i) / static_cast<MathSize>(round_by);
+    static constexpr int64_t RoundBy{pow_int<RoundByDigits>(static_cast<int64_t>(10))};
+    static_assert(0 == RoundBy % 10);
+    static_assert(10 <= RoundBy);
+    static_assert(std::numeric_limits<int64_t>::max() > RoundBy);
+    // stay a few decimals from max
+    static constexpr size_t BufferDigits = 2;
+    static_assert(std::numeric_limits<int64_t>::digits10 > (RoundByDigits + BufferDigits));
+    // static constexpr size_t Buffer = pow_int<BufferDigits>(10);
+    static constexpr int64_t MaxFloatValue =
+      pow_int<std::numeric_limits<int64_t>::digits10 - (RoundByDigits + BufferDigits)>(
+        static_cast<int64_t>(10)
+      );
+    static_assert(
+      static_cast<size_t>(std::numeric_limits<int64_t>::max())
+      > (static_cast<size_t>(RoundBy) * static_cast<size_t>(MaxFloatValue))
+    );
+    // static constexpr auto MaxValue = static_cast<MathSize>(
+    //   static_cast<int64 _t>(std::numeric_limits<int64_t>::max())
+    //   / static_cast<int64_t>(RoundBy * MaxFloatValue)
+    // );
+    // static constexpr auto MinValue = static_cast<MathSize>(
+    //   static_cast<int64_t>(std::numeric_limits<int64_t>::min())
+    //   / static_cast<int64_t>(RoundBy * MaxFloatValue)
+    // );
+    static constexpr auto MaxValue = MaxFloatValue;
+    static constexpr auto MinValue = -MaxFloatValue;
+    static constexpr auto MaxIntValue =
+      static_cast<int64_t>(MaxValue * static_cast<MathSize>(RoundBy));
+    static constexpr auto MinIntValue =
+      static_cast<int64_t>(MinValue * static_cast<MathSize>(RoundBy));
+    // HACK: ensure not out of bounds
+    if (MaxFloatValue < value || value < -MaxFloatValue)
+    {
+      printf(
+        "Rounding value %0.100g results in it going out of bounds (%ld, %ld)\n",
+        value,
+        MaxValue,
+        MinValue
+      );
+      exit(-1);
+    }
+    static MathSize min_recorded{std::numeric_limits<MathSize>::max()};
+    static MathSize max_recorded{std::numeric_limits<MathSize>::min()};
+    if (value < min_recorded)
+    {
+      printf(
+        "Minimum recorded value is now %0.100g of possible %ld from %0.100g\n",
+        value,
+        MinValue,
+        min_recorded
+      );
+      min_recorded = value;
+    }
+    if (max_recorded < value)
+    {
+      printf(
+        "Maximum recorded value is now %0.100g of possible %ld from %0.100g\n",
+        value,
+        MaxValue,
+        max_recorded
+      );
+      max_recorded = value;
+    }
+    const auto i = static_cast<int64_t>(value * static_cast<MathSize>(RoundBy));
+    // HACK: ensure not out of bounds
+    if (MaxIntValue < i || i < MinIntValue)
+    {
+      printf(
+        "Rounding value %0.100g -> %ld results in it going out of bounds (%ld, %ld)\n",
+        value,
+        i,
+        MaxIntValue,
+        MinIntValue
+      );
+      exit(-1);
+    }
+    const auto v = static_cast<MathSize>(i) / static_cast<MathSize>(RoundBy);
     return v;
   }
 
 public:
   MathSize value{};
   constexpr PreciseValue() = default;
-  constexpr PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
+  PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
   constexpr operator double() const noexcept { return value; }
 };
+// HACK: float values seem to deviate at 18 digits, but round so we can have MaxFloatValue not
+// overflow
 using RoundedValue = PreciseValue<8>;
 // HACK: use for replicating old LookupTable rounding
 using LookupValue = PreciseValue<1>;
