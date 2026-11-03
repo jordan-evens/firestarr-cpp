@@ -163,7 +163,7 @@ class PreciseValue
     }
 #endif
     // round instead of truncating
-    const auto i = static_cast<int64_t>(round(value * static_cast<MathSize>(RoundBy)));
+    const auto i = static_cast<int64_t>(nearbyint(value * static_cast<MathSize>(RoundBy)));
 #if defined(DEBUG_ROUNDING) || defined(CHECK_ROUNDING)
     // ensure not out of bounds
     if (MaxIntValue < i || i < MinIntValue)
