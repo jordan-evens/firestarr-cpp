@@ -65,7 +65,7 @@ template <size_t N, class T>
 }
 // HACK: force rounding so that precision matches across platforms
 // HACK: float values seem to deviate at 18 digits, but round to have MaxFloatValue not overflow
-static constexpr size_t RoundedDigits{15};
+static constexpr size_t RoundedDigits{14};
 static constexpr size_t RoundedMax{1'000};
 // Can go 300k+ for S3. Don't want to use int but don't need high precision
 static constexpr size_t IntensityDigits{12};
@@ -143,7 +143,6 @@ class PreciseValue
       }
       if (max_recorded < value)
       {
-        // if (max_magnitude * 10 < value)
         // 16k -> rso = FuelType::criticalRos(spread.sfc_, critical_surface_intensity);
         // 388k -> spread.is_crown_ = FuelType::isCrown(critical_surface_intensity, sfi);
         if (value > 1000)
