@@ -269,7 +269,7 @@ public:
    */
   [[nodiscard]] MathSize isfD1(
     const SpreadInfo& spread,
-    MathSize ros_multiplier,
+    const RoundedValue& ros_multiplier,
     const RoundedValue& isi
   ) const noexcept;
 };
@@ -335,7 +335,7 @@ public:
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \return Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66, pg 38]
    */
-  [[nodiscard]] MathSize crownConsumption(const MathSize cfb) const noexcept override
+  [[nodiscard]] MathSize crownConsumption(const RoundedValue& cfb) const noexcept override
   {
     return ratioConifer()
          * StandardFuelOld<A, B, C, Bui0, 6, 80, BulkDensity, InorganicPercent, DuffDepth>::
@@ -580,9 +580,9 @@ public:
    * \param ws Wind Speed (km/h)
    * \return Length to Breadth ratio [ST-X-3 eq 80/81]
    */
-  [[nodiscard]] MathSize lengthToBreadth(const MathSize ws) const noexcept override
+  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const noexcept override
   {
-    return calculate_length_to_breadth_grass(ws);
+    return calculate_length_to_breadth_grass(ws.value);
   }
 
 public:
@@ -592,7 +592,7 @@ public:
    * \param isi Initial Spread Index (may differ from wx because of slope)
    * \return Rate of spread (m/min)
    */
-  [[nodiscard]] MathSize calculateRos(const MathSize multiplier, const RoundedValue& isi)
+  [[nodiscard]] MathSize calculateRos(const RoundedValue& multiplier, const RoundedValue& isi)
     const noexcept
   {
     return multiplier * this->rosBasic(isi);
@@ -742,8 +742,8 @@ protected:
   [[nodiscard]] MathSize finalRos(
     const SpreadInfo& spread,
     const RoundedValue& isi,
-    MathSize cfb,
-    MathSize rss
+    const RoundedValue& cfb,
+    const RoundedValue& rss
   ) const noexcept override;
 };
 /**
@@ -1150,7 +1150,7 @@ public:
    * \param bui Build-up Index
    * \return BUI Effect on surface fire rate of spread [ST-X-3 eq 54]
    */
-  [[nodiscard]] MathSize buiEffect(MathSize bui) const override
+  [[nodiscard]] MathSize buiEffect(const RoundedValue& bui) const override
   {
     return compare_by_season(*this, [bui](const FuelType& fuel) { return fuel.buiEffect(bui); });
   }
@@ -1185,7 +1185,7 @@ public:
    * \param cfb Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    * \return Crown Fuel Consumption (CFC) (kg/m^2) [ST-X-3 eq 66]
    */
-  [[nodiscard]] MathSize crownConsumption(const MathSize cfb) const override
+  [[nodiscard]] MathSize crownConsumption(const RoundedValue& cfb) const override
   {
     return compare_by_season(*this, [cfb](const FuelType& fuel) {
       return fuel.crownConsumption(cfb);
@@ -1227,7 +1227,7 @@ public:
    * \param ws Wind Speed (km/h)
    * \return Length to Breadth ratio [ST-X-3 eq 79]
    */
-  [[nodiscard]] MathSize lengthToBreadth(const MathSize ws) const override
+  [[nodiscard]] MathSize lengthToBreadth(const RoundedValue& ws) const override
   {
     return compare_by_season(*this, [ws](const FuelType& fuel) {
       return fuel.lengthToBreadth(ws);
@@ -1241,12 +1241,9 @@ public:
    * \param rss Surface Rate of spread (ROS) (m/min) [ST-X-3 eq 55]
    * \return Final rate of spread (m/min)
    */
-  [[nodiscard]] MathSize finalRos(
-    const SpreadInfo&,
-    const RoundedValue&,
-    const MathSize,
-    const MathSize
-  ) const override
+  [[nodiscard]] MathSize
+  finalRos(const SpreadInfo&, const RoundedValue&, const RoundedValue&, const RoundedValue&)
+    const override
   {
     throw runtime_error("FuelVariable not resolved to specific type");
   }
@@ -1265,7 +1262,7 @@ public:
    * \param rso Critical surface fire spread rate (RSO) [ST-X-3 eq 57]
    * \return Crown Fraction Burned (CFB) [ST-X-3 eq 58]
    */
-  [[nodiscard]] MathSize crownFractionBurned(const MathSize rss, const MathSize rso)
+  [[nodiscard]] MathSize crownFractionBurned(const RoundedValue& rss, const RoundedValue& rso)
     const noexcept override
   {
     return spring()->crownFractionBurned(rss, rso);
@@ -1275,7 +1272,7 @@ public:
    * \param mc_fraction moisture content (% / 100)
    * \return Calculate probability of burning [Anderson eq 1]
    */
-  [[nodiscard]] MathSize probabilityPeat(const MathSize mc_fraction) const noexcept override
+  [[nodiscard]] MathSize probabilityPeat(const RoundedValue& mc_fraction) const noexcept override
   {
     return spring()->probabilityPeat(mc_fraction);
   }
