@@ -2,8 +2,8 @@
 #ifndef FS_OBSERVER_H
 #define FS_OBSERVER_H
 #include "stdafx.h"
+#include "grid/GridMap.h"
 #include "Event.h"
-#include "GridMap.h"
 #include "Scenario.h"
 namespace fs
 {

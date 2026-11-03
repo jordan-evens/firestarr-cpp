@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_PERIMETER_H
 #define FS_PERIMETER_H
-#include "stdafx.h"
-#include "geo/Point.h"
+#include "../stdafx.h"
+#include "../geo/Point.h"
 #include "GridMap.h"
 namespace fs
 {

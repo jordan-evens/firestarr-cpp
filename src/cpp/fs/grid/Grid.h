@@ -1,11 +1,11 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
 #ifndef FS_GRID_H
 #define FS_GRID_H
-#include "stdafx.h"
-#include "geo/Point.h"
-#include "types/Location.h"
-#include "Log.h"
-#include "Settings.h"
+#include "../stdafx.h"
+#include "../geo/Point.h"
+#include "../Log.h"
+#include "../Settings.h"
+#include "../types/Location.h"
 #include "tiff.h"
 namespace fs
 {

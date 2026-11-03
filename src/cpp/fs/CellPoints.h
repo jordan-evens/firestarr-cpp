@@ -4,10 +4,10 @@
 #include "stdafx.h"
 #include <algorithm>
 #include <compare>
+#include "grid/BurnedData.h"
+#include "grid/Cell.h"
 #include "types/Location.h"
 #include "wx/WeatherIndices.h"
-#include "BurnedData.h"
-#include "Cell.h"
 #include "FireSpread.h"
 #include "unstable.h"
 namespace fs

@@ -2,8 +2,8 @@
 #ifndef FS_FUEL_OLD_LOOKUP_H
 #define FS_FUEL_OLD_LOOKUP_H
 #include "../fs/stdafx.h"
-#include "../fs/Cell.h"
 #include "../fs/fuel/FuelType.h"
+#include "../fs/grid/Cell.h"
 #include "../fs/Util.h"
 #include "FuelTypeOld.h"
 namespace fs::fuelold

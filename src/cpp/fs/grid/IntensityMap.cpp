@@ -1,12 +1,12 @@
 /* SPDX-License-Identifier: AGPL-3.0-or-later */
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "IntensityMap.h"
-#include "types/Location.h"
-#include "wx/WeatherIndices.h"
-#include "Model.h"
+#include "../Model.h"
+#include "../types/Location.h"
+#include "../unstable.h"
+#include "../Util.h"
+#include "../wx/WeatherIndices.h"
 #include "Perimeter.h"
-#include "unstable.h"
-#include "Util.h"
 namespace fs
 {
 template <class T>
