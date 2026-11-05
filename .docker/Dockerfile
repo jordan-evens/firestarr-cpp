@@ -104,9 +104,10 @@ RUN --mount=type=bind,source=./vcpkg.json,target=./vcpkg.json \
     && cmake --build --parallel --preset Release \
     && ctest --parallel --preset Release \
     && ./firestarr -h \
-    && ./firestarr test/output/reference-cmp 2024-06-03 58.81228184403946 -122.9117103995713 01:00 --ffmc 89.9 --dmc 59.5 --dc 450.9 --apcp_prev 0 -v --wx ./test/input/10N_50651/firestarr_10N_50651_wx.csv --output_date_offsets [1,2,3] --tz -5 --raster-root ./test/input/10N_50651/ --perim ./test/input/10N_50651/10N_50651.tif -i --ascii \
-    && rm test/output/reference-cmp/*.ini test/output/reference-cmp/*.log \
-    && diff -rq test/output/reference test/output/reference-cmp
+    && ./firestarr ./test/output/reference-cmp 2024-06-03 58.81228184403946 -122.9117103995713 01:00 --ffmc 89.9 --dmc 59.5 --dc 450.9 --apcp_prev 0 -v --wx ./test/input/10N_50651/firestarr_10N_50651_wx.csv --output_date_offsets [1,2,3] --tz -5 --raster-root ./test/input/10N_50651/ --perim ./test/input/10N_50651/10N_50651.tif -i --ascii \
+    && rm ./test/output/reference-cmp/*.ini \
+    && rm ./test/output/reference-cmp/*.log \
+    && diff -rq ./test/output/reference ./test/output/reference-cmp
 
 # make a layer with scratch to clear out old layers
 FROM scratch AS firestarr-minimal
