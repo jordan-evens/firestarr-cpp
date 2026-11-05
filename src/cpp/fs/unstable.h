@@ -188,12 +188,23 @@ public:
   MathSize value{};
   ~PreciseValue() noexcept = default;
   constexpr PreciseValue() = default;
-  constexpr PreciseValue(const PreciseValue<RoundByDigits, MaxValueAtLeast>& rhs
-  ) noexcept = default;
-  constexpr PreciseValue(PreciseValue<RoundByDigits, MaxValueAtLeast>&& rhs) noexcept = default;
-  PreciseValue& operator=(const PreciseValue<RoundByDigits, MaxValueAtLeast>& rhs
-  ) noexcept = default;
-  PreciseValue& operator=(PreciseValue<RoundByDigits, MaxValueAtLeast>&& rhs) noexcept = default;
+  // HACK: force rounding again
+  constexpr PreciseValue(const PreciseValue<RoundByDigits, MaxValueAtLeast>& rhs) noexcept
+    : PreciseValue(rhs.value)
+  { }
+  constexpr PreciseValue(PreciseValue<RoundByDigits, MaxValueAtLeast>&& rhs) noexcept
+    : PreciseValue(rhs.value)
+  { }
+  PreciseValue& operator=(const PreciseValue<RoundByDigits, MaxValueAtLeast>& rhs) noexcept
+  {
+    value = round_value(rhs.value);
+    return *this;
+  }
+  PreciseValue& operator=(PreciseValue<RoundByDigits, MaxValueAtLeast>&& rhs) noexcept
+  {
+    value = round_value(rhs.value);
+    return *this;
+  }
   PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
   constexpr operator double() const noexcept { return value; }
 };
