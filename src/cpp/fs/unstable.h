@@ -185,27 +185,35 @@ class PreciseValue
   }
 
 public:
+  using precise_type = PreciseValue<RoundByDigits, MaxValueAtLeast>;
   MathSize value{};
   ~PreciseValue() noexcept = default;
   constexpr PreciseValue() = default;
+
+private:
+  // HACK: provide a way to get infinity into this but check everything else
+  PreciseValue(const MathSize& v, const bool check) noexcept : value{check ? round_value(v) : v} { }
+
+public:
+  static precise_type infinity()
+  {
+    static const auto inf = precise_type{std::numeric_limits<MathSize>::infinity(), false};
+    return inf;
+  }
   // HACK: force rounding again
-  constexpr PreciseValue(const PreciseValue<RoundByDigits, MaxValueAtLeast>& rhs) noexcept
-    : PreciseValue(rhs.value)
-  { }
-  constexpr PreciseValue(PreciseValue<RoundByDigits, MaxValueAtLeast>&& rhs) noexcept
-    : PreciseValue(rhs.value)
-  { }
-  PreciseValue& operator=(const PreciseValue<RoundByDigits, MaxValueAtLeast>& rhs) noexcept
+  constexpr PreciseValue(const precise_type& rhs) noexcept : PreciseValue(rhs.value) { }
+  constexpr PreciseValue(precise_type&& rhs) noexcept : PreciseValue(rhs.value) { }
+  PreciseValue& operator=(const precise_type& rhs) noexcept
   {
     value = round_value(rhs.value);
     return *this;
   }
-  PreciseValue& operator=(PreciseValue<RoundByDigits, MaxValueAtLeast>&& rhs) noexcept
+  PreciseValue& operator=(precise_type&& rhs) noexcept
   {
     value = round_value(rhs.value);
     return *this;
   }
-  PreciseValue(const MathSize& v) noexcept : value{round_value(v)} { }
+  PreciseValue(const MathSize& v) noexcept : PreciseValue(v, true) { }
   constexpr operator double() const noexcept { return value; }
 };
 using RoundedValue = PreciseValue<RoundedDigits, RoundedMax>;

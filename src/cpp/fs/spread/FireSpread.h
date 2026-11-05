@@ -27,7 +27,9 @@ public:
     const Direction raz,
     const Offset offset
   ) noexcept
-    : intensity_{intensity}, ros_{ros}, raz_{Direction{Radians{RoundedValue{raz.asRadians()}}}},
+    // HACK: round ros again
+    : intensity_{intensity}, ros_{ros.value},
+      raz_{Direction{Radians{RoundedValue{raz.asRadians()}}}},
       offset_{RoundedValue{offset.x}.value, RoundedValue{offset.y}.value}
   { }
   ROSOffset(const ROSOffset& rhs) noexcept = default;
@@ -80,7 +82,7 @@ public:
    * \param threshold Probability of spread threshold
    * \return Rate of spread at given threshold (m/min)
    */
-  [[nodiscard]] static MathSize calculateRosFromThreshold(const ThresholdSize threshold);
+  [[nodiscard]] static ThresholdSize calculateRosFromThreshold(const ThresholdSize threshold);
   /**
    * \brief Maximum intensity in any direction for spread (kW/m)
    * \return Maximum intensity in any direction for spread (kW/m)
